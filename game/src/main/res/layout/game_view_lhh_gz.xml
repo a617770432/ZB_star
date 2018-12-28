@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/gameWhite"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000">
+
+        <LinearLayout
+            android:id="@+id/ll_brand"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@mipmap/bg_lh_top"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_bet_l"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/bet_and_per_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/bet_view_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_lh_l"
+                    android:textColor="@color/long_"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:id="@+id/mybet_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/game_lh_mybet_bg"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="6dp"
+                    android:text="0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/per_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:1"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_bet_he"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/bet_and_per_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/bet_view_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_lh_he"
+                    android:textColor="@color/he"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:id="@+id/mybet_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/game_lh_mybet_bg"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="6dp"
+                    android:text="0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/per_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:8"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_bet_hu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/bet_and_per_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/bet_view_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_lh_hu"
+                    android:textColor="@color/hu"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/mybet_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/game_lh_mybet_bg"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="6dp"
+                    android:paddingLeft="4dp"
+                    android:text="0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/per_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:8"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/ll_brand"
+            android:background="#000"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_sr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/game_lh_start_record"
+                android:textColor="@color/gameWhite"
+                />
+
+            <TextView
+                android:id="@+id/record_l"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@id/tv_sr"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_rect_l"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="龙(0)"
+                android:textColor="@color/gameWhite"
+                />
+
+            <TextView
+                android:id="@+id/record_he"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignTop="@id/record_l"
+                android:layout_below="@id/tv_sr"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/record_l"
+                android:background="@drawable/bg_rect_he"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="和(0)"
+                android:textColor="@color/gameWhite"
+                />
+
+            <TextView
+                android:id="@+id/record_hu"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignTop="@id/record_l"
+                android:layout_below="@id/tv_sr"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/record_he"
+                android:background="@drawable/bg_rect_hu"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="虎(0)"
+                android:textColor="@color/gameWhite"
+                />
+
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/game_lh_please_bet"
+                android:textColor="@color/gameWhite"
+                />
+
+            <TextView
+                android:id="@+id/bet_confirm"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/record_l"
+                android:layout_below="@id/tv_sr"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_btn_bet_confrim"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/game_lh_bet_confirm"
+                android:textColor="@color/gameWhite"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/count_down_2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:background="@mipmap/game_lh_unclock"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:text="0"
+            android:textColor="@color/gameWhite"
+            android:textSize="14sp"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@mipmap/game_lh_border"
+        />
+
+    <include
+        layout="@layout/game_view_lh_result"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@mipmap/game_lh_border"
+        />
+
+    <ViewStub
+        android:id="@+id/view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout="@layout/game_view_bet_lh"
+        />
+
+</LinearLayout>

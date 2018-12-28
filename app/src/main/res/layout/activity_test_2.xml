@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
+
+    <!--<com.xingqiuzhibo.phonelive.custom.ProgressTextView2-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:gravity="center"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="20sp"-->
+    <!--app:ptv2_bg_color="@color/pk_blue"-->
+    <!--app:ptv2_fg_color="@color/pk_red"-->
+    <!--app:ptv2_progress="4"-->
+    <!--app:ptv2_stroke_width="6dp"-->
+    <!--/>-->
+    <android.support.v7.widget.RecyclerView
+        android:background="@drawable/bg_coinimg"
+        android:id="@+id/recyclerView"
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:layout_gravity="bottom"/>
+
+</LinearLayout>

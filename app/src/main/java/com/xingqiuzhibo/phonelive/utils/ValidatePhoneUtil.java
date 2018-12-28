@@ -1,0 +1,25 @@
+package com.xingqiuzhibo.phonelive.utils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class ValidatePhoneUtil {
+    //判断手机号码的正则表达式
+    //private static final String MOBILE_NUM_REGEX = "^((13[0-9])|(15[^4,\\D])|(18[0-9])|(17[0-9]))\\d{8}$";
+    private static final String MOBILE_NUM_REGEX = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+
+
+    /**
+     * 验证一个号码是不是手机号
+     *
+     * @param mobileNumber
+     */
+    public static boolean validateMobileNumber(String mobileNumber) {
+        Pattern p = Pattern.compile(MOBILE_NUM_REGEX);
+        Matcher m = p.matcher(mobileNumber);
+        return m.matches();
+    }
+
+
+}

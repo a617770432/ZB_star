@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:\studio_space\ZB_star\18.12.8-湖南星链.iml" filepath="D:\studio_space\ZB_star\18.12.8-湖南星链.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZB_star.iml" filepath="$PROJECT_DIR$/ZB_star.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\app\app.iml" filepath="D:\studio_space\ZB_star\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/beauty/beauty.iml" filepath="$PROJECT_DIR$/beauty/beauty.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\beauty\beauty.iml" filepath="D:\studio_space\ZB_star\beauty\beauty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game/game.iml" filepath="$PROJECT_DIR$/game/game.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\game\game.iml" filepath="D:\studio_space\ZB_star\game\game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpush/jpush.iml" filepath="$PROJECT_DIR$/jpush/jpush.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\jpush\jpush.iml" filepath="D:\studio_space\ZB_star\jpush\jpush.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mob/mob.iml" filepath="$PROJECT_DIR$/mob/mob.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\mob\mob.iml" filepath="D:\studio_space\ZB_star\mob\mob.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\phonelive-new-js-demo.iml" filepath="D:\studio_space\ZB_star\phonelive-new-js-demo.iml" />
+      <module fileurl="file://D:\studio_space\ZB_star\temp.iml" filepath="D:\studio_space\ZB_star\temp.iml" />
+    </modules>
+  </component>
+</project>

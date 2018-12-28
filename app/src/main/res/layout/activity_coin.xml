@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/bg_coin_head"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="@string/coin_balance"
+                android:textColor="@color/textColor2"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/global"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <RadioGroup
+            android:background="@color/white"
+            android:id="@+id/rg_tit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/top"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/btn_coin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/coin_line"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/charge"/>
+
+            <RadioButton
+                android:id="@+id/btn_cur_order"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/coin_line"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/cur_order"/>
+
+            <RadioButton
+                android:id="@+id/btn_appeal_order"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/coin_line"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/appeal_order"/>
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/top"
+            android:layout_marginTop="47dp"
+            android:background="@color/gray2"/>
+
+
+        <com.xingqiuzhibo.phonelive.custom.RefreshLayout
+            android:layout_below="@id/rg_tit"
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            app:loadMoreEnable="true"
+            app:refreshEnable="false"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                />
+        </com.xingqiuzhibo.phonelive.custom.RefreshLayout>
+
+
+
+    </RelativeLayout>
+</LinearLayout>

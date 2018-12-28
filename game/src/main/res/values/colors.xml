@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gameTextColor">#323232</color>
+    <color name="gameWhite">#ffffff</color>
+    <color name="gameGray">#f5f5f5</color>
+    <color name="gameGlobal">#ffdd00</color>
+    <color name="long_">#fe3a2f</color>
+    <color name="hu">#2588f9</color>
+    <color name="he">#17bb3a</color>
+    <color name="line">#ffb5b5b5</color>
+    <color name="gameCloseGray">#bbbbbb</color>
+
+</resources>

@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/gameWhite"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000">
+
+        <LinearLayout
+            android:id="@+id/ll_brand"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@mipmap/bg_lh_top"
+            >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/tv_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/game_lh_l"
+                    android:textColor="@color/long_"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/can_wins_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="可赢：0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/can_wins_l"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/tv_l"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_coin"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/coin_l"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_persons"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/persons_l"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_per"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/per_l"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/tv_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/game_lh_he"
+                    android:textColor="@color/he"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/can_wins_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="可赢：0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/can_wins_he"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/tv_he"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_coin"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/coin_he"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_persons"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/persons_he"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_per"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/per_he"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/tv_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/game_lh_hu"
+                    android:textColor="@color/hu"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/can_wins_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="可赢：0"
+                    android:textColor="@color/gameWhite"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/can_wins_hu"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/tv_hu"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_coin"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/coin_hu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_persons"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/persons_hu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_per"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/per_hu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/gameWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/ll_brand"
+            android:background="#000"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_sr"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/game_lh_start_record"
+                android:textColor="@color/gameWhite"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/record_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/tv_sr"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_rect_l"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="龙(0)"
+                    android:textColor="@color/gameWhite"
+                    />
+
+                <TextView
+                    android:id="@+id/record_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_rect_he"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="和(0)"
+                    android:textColor="@color/gameWhite"
+                    />
+
+                <TextView
+                    android:id="@+id/record_hu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_rect_hu"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="虎(0)"
+                    android:textColor="@color/gameWhite"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/l_win"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_game_win_l"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/game_l_win"
+                    android:textColor="@color/gameWhite"
+                    />
+
+
+                <TextView
+                    android:id="@+id/he_win"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_game_win_he"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/game_he_win"
+                    android:textColor="@color/gameWhite"
+                    />
+
+                <TextView
+                    android:id="@+id/hu_win"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_game_win_hu"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/game_hu_win"
+                    android:textColor="@color/gameWhite"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/count_down_2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp"
+            android:background="@mipmap/game_lh_unclock"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:text="0"
+            android:textColor="@color/gameWhite"
+            android:textSize="14sp"
+            android:visibility="visible"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@mipmap/game_lh_border"
+        />
+
+    <include
+        layout="@layout/game_view_lh_result"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@mipmap/game_lh_border"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#000"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/exit_game"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_game_lh_exit"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/game_lh_exit"
+            android:textColor="@color/gameWhite"/>
+
+        <TextView
+            android:id="@+id/start_or_balance"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/exit_game"
+            android:background="@drawable/bg_btn_start"
+            android:gravity="center"
+            android:text="@string/game_start"
+            android:textColor="@color/gameWhite"/>
+    </RelativeLayout>
+</LinearLayout>
