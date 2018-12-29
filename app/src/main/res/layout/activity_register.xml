@@ -17,6 +17,7 @@
         android:layout_height="40dp"
         android:src="@mipmap/icon_return_white"
         android:layout_marginTop="30dp"
+        android:padding="8dp"
         />
 
     <TextView
@@ -71,7 +72,7 @@
                 android:hint="@string/reg_input_phone"
                 android:inputType="number"
                 android:maxLength="11"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray3"
                 android:textSize="16sp" />
 
@@ -103,7 +104,7 @@
                 android:hint="@string/reg_input_code"
                 android:inputType="number"
                 android:maxLength="6"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray3"
                 android:textSize="16sp" />
 
@@ -146,7 +147,7 @@
                 android:hint="@string/reg_input_pwd_1"
                 android:inputType="textPassword"
                 android:maxLength="11"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray3"
                 android:textSize="16sp" />
 
@@ -176,8 +177,8 @@
                 android:background="@null"
                 android:hint="请输入邀请码"
                 android:inputType="textPassword"
-                android:maxLength="11"
-                android:textColor="@color/textColor"
+                android:maxLength="10"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray3"
                 android:textSize="16sp" />
 

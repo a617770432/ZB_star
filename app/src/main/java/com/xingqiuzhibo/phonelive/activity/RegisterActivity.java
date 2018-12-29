@@ -127,6 +127,14 @@ public class RegisterActivity extends AbsActivity {
         };
         mDialog = DialogUitl.loadingDialog(mContext, getString(R.string.reg_register_ing));
         EventBus.getDefault().register(this);
+
+        findViewById(R.id.iv_return).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void changeEnable() {
