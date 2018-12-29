@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/login_tip_1"
-            android:textColor="@color/textColor"
+            android:textColor="#CCCCCC"
             android:textSize="12sp"
             />
 
@@ -38,7 +38,7 @@
             android:background="@drawable/login_tip"
             android:onClick="loginClick"
             android:text="@string/login_tip_2"
-            android:textColor="@color/textColor"
+            android:textColor="#CCCCCC"
             android:textSize="12sp"
             />
     </LinearLayout>
@@ -52,6 +52,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
         android:overScrollMode="never"
+        android:visibility="gone"
         />
 
     <LinearLayout
@@ -61,6 +62,7 @@
         android:layout_above="@id/recyclerView"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
+        android:visibility="gone"
         >
 
         <View
@@ -92,21 +94,33 @@
         android:id="@+id/tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="@string/login_tip_3"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="22sp"
+        android:layout_marginLeft="35dp"
+        />
+
+    <TextView
+        android:id="@+id/tip1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/login_tip_4"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginLeft="35dp"
+        android:layout_below="@+id/tip"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tip"
+        android:layout_below="@+id/tip1"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="45dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -121,7 +135,7 @@
                 android:gravity="center_vertical|right"
                 android:minWidth="45dp"
                 android:text="+86"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 />
 
@@ -132,6 +146,7 @@
                 android:layout_marginLeft="5dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/icon_login_down"
+                android:visibility="invisible"
                 />
 
             <EditText
@@ -146,8 +161,8 @@
                 android:inputType="number"
                 android:maxLength="11"
                 android:singleLine="true"
-                android:textColor="@color/textColor"
-                android:textColorHint="@color/gray1"
+                android:textColor="@color/white"
+                android:textColorHint="#CCCCCC"
                 android:textSize="16sp"
                 />
         </LinearLayout>
@@ -170,8 +185,8 @@
                 android:hint="@string/login_input_pwd"
                 android:inputType="textPassword"
                 android:singleLine="true"
-                android:textColor="@color/textColor"
-                android:textColorHint="@color/gray1"
+                android:textColor="@color/white"
+                android:textColorHint="#CCCCCC"
                 android:textSize="16sp"
                 />
 
@@ -182,7 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/layout_login_btn"
             android:enabled="false"
             android:gravity="center"
             android:onClick="loginClick"
@@ -194,7 +209,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             >
 
             <TextView
@@ -203,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="loginClick"
                 android:text="@string/login_immediately_register"
-                android:textColor="@color/global"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 />
 
@@ -214,7 +229,7 @@
                 android:layout_alignParentRight="true"
                 android:onClick="loginClick"
                 android:text="@string/login_forget_pwd"
-                android:textColor="@color/gray1"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 />
         </RelativeLayout>

@@ -1,9 +1,11 @@
 package com.xingqiuzhibo.phonelive.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -25,7 +27,7 @@ import com.xingqiuzhibo.phonelive.activity.FollowActivity;
 import com.xingqiuzhibo.phonelive.activity.LiveContributeActivity;
 import com.xingqiuzhibo.phonelive.activity.LiveGuardListActivity;
 import com.xingqiuzhibo.phonelive.activity.UserHomeActivity;
-import com.xingqiuzhibo.phonelive.adapter.ViewPagerAdapter;
+import com.xingqiuzhibo.phonelive.adapter.NewViewPagerAdapter;
 import com.xingqiuzhibo.phonelive.bean.ImpressBean;
 import com.xingqiuzhibo.phonelive.bean.LevelBean;
 import com.xingqiuzhibo.phonelive.bean.LiveBean;
@@ -46,6 +48,7 @@ import com.xingqiuzhibo.phonelive.presenter.CheckLivePresenter;
 import com.xingqiuzhibo.phonelive.presenter.UserHomeSharePresenter;
 import com.xingqiuzhibo.phonelive.utils.IconUtil;
 import com.xingqiuzhibo.phonelive.utils.StringUtil;
+import com.xingqiuzhibo.phonelive.utils.TextRender;
 import com.xingqiuzhibo.phonelive.utils.ToastUtil;
 import com.xingqiuzhibo.phonelive.utils.WordUtil;
 
@@ -102,8 +105,22 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
     private CheckLivePresenter mCheckLivePresenter;
     private LiveBean mLiveBean;
 
-    public LiveUserHomeViewHolder(Context context, ViewGroup parentView) {
-        super(context, parentView);
+    //改
+    private TextView tvGet;
+    private TextView tvSend;
+    private FragmentManager fm;
+    private LinearLayout llFans , llFollow;
+
+    public LiveUserHomeViewHolder( Context context, ViewGroup parentView , FragmentManager fm) {
+        super(context, parentView,fm);
+//        //改
+//        this.fm = fm;
+    }
+
+    @Override
+    protected void processArguments(Object... args) {
+        super.processArguments(args);
+        this.fm = (FragmentManager) args[0];
     }
 
     @Override
@@ -115,6 +132,15 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
     public void init() {
         super.init();
         mInflater = LayoutInflater.from(mContext);
+
+        //改
+        tvGet = (TextView) findViewById(R.id.tv_get);
+        tvSend = (TextView) findViewById(R.id.tv_send);
+        llFans = (LinearLayout) findViewById(R.id.ll_fans);
+        llFollow = (LinearLayout) findViewById(R.id.ll_follow);
+        llFans.setOnClickListener(this);
+        llFollow.setOnClickListener(this);
+
         mBottom = findViewById(R.id.bottom);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
         mAppBarLayout.addOnOffsetChangedListener(this);
@@ -155,14 +181,11 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
         mLifeCycleListeners.add(mLiveRecordViewHolder.getLifeCycleListener());
         List<View> viewList = new ArrayList<>();
         viewList.add(mLiveRecordViewHolder.getContentView());
-        mViewPager.setAdapter(new ViewPagerAdapter(viewList));
-        mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
-        mIndicator.setVisibleChildCount(1);
-        mIndicator.setTitles(new String[]{WordUtil.getString(R.string.live)});
-        mIndicator.setViewPager(mViewPager);
+
+
         mBtnShare.setOnClickListener(this);
-        mBtnFans.setOnClickListener(this);
-        mBtnFollow.setOnClickListener(this);
+//        mBtnFans.setOnClickListener(this);
+//        mBtnFollow.setOnClickListener(this);
         mBtnFollow2.setOnClickListener(this);
         mBtnBlack.setOnClickListener(this);
         mBtnEnter2.setOnClickListener(this);
@@ -191,15 +214,26 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
         }
         mToUid = toUid;
         mSelf = mToUid.equals(AppConfig.getInstance().getUid());
-        if (mSelf) {
-            if (mBottom.getVisibility() == View.VISIBLE) {
-                mBottom.setVisibility(View.GONE);
-            }
-        } else {
-            if (mBottom.getVisibility() != View.VISIBLE) {
-                mBottom.setVisibility(View.VISIBLE);
-            }
-        }
+
+        //改---------------
+        NewViewPagerAdapter adapter = new NewViewPagerAdapter(fm , mToUid);
+        mViewPager.setAdapter(adapter);
+        mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
+        mIndicator.setVisibleChildCount(2);
+        mIndicator.setTitles(new String[]{ "映票贡献榜" , WordUtil.getString(R.string.guard_list)});
+
+        mIndicator.setViewPager(mViewPager);
+
+        //改---------------------------
+//        if (mSelf) {
+//            if (mBottom.getVisibility() == View.VISIBLE) {
+//                mBottom.setVisibility(View.GONE);
+//            }
+//        } else {
+//            if (mBottom.getVisibility() != View.VISIBLE) {
+//                mBottom.setVisibility(View.VISIBLE);
+//            }
+//        }
     }
 
     public void isVisBtnEnter(boolean isVis) {
@@ -234,12 +268,23 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
                     ImgLoader.display(level.getThumb(), mLevel);
                     mID.setText(userBean.getLiangNameTip());
                     String fansNum = StringUtil.toWan(userBean.getFans());
-                    mBtnFans.setText(fansNum + " " + WordUtil.getString(R.string.fans));
-                    mBtnFollow.setText(StringUtil.toWan(userBean.getFollows()) + " " + WordUtil.getString(R.string.follow));
-                    mSign.setText(userBean.getSignature());
+
+                    //改了----------------------------------------------------------------
+                    mBtnFans.setText(fansNum);
+                    mBtnFollow.setText(StringUtil.toWan(userBean.getFollows()));
+                    if(TextUtils.isEmpty(userBean.getSignature())){
+                        mSign.setText("这家伙很懒，什么都没留下");
+                    }else {
+                        mSign.setText(userBean.getSignature());
+                    }
+
+                    tvGet.setText( TextRender.renderLiveUserDialogData(Long.parseLong(userBean.getVotestotal())) );
+                    tvSend.setText( TextRender.renderLiveUserDialogData(Long.parseLong(userBean.getConsumption())) );
+                    //改了----------------------------------------------------------------
+
                     mBtnFollow2.setText(obj.getIntValue("isattention") == 1 ? R.string.following : R.string.follow);
                     mBtnBlack.setText(obj.getIntValue("isblack") == 1 ? R.string.black_ing : R.string.black);
-                    mIndicator.setTitleText(0, WordUtil.getString(R.string.live) + " " + obj.getString("livenums"));
+//                    mIndicator.setTitleText(0, WordUtil.getString(R.string.live) + " " + obj.getString("livenums"));
                     showImpress(obj.getString("label"));
                     mVotesName.setText(appConfig.getVotesName() + WordUtil.getString(R.string.live_user_home_con));
                     mUserHomeSharePresenter.setToUid(mToUid).setToName(toName).setAvatarThumb(userBean.getAvatarThumb()).setFansNum(fansNum);
@@ -264,10 +309,11 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
             list = list.subList(0, 3);
         }
         if (!mSelf) {
-            ImpressBean lastBean = new ImpressBean();
-            lastBean.setName("+ " + WordUtil.getString(R.string.impress_add));
-            lastBean.setColor("#ffdd00");
-            list.add(lastBean);
+            //改
+//            ImpressBean lastBean = new ImpressBean();
+//            lastBean.setName("+ " + WordUtil.getString(R.string.impress_add));
+//            lastBean.setColor("#ffdd00");
+//            list.add(lastBean);
         } else {
             if (list.size() == 0) {
                 mNoImpressTip.setVisibility(View.VISIBLE);
@@ -281,7 +327,7 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
                 bean.setCheck(1);
             } else {
                 if (i == size - 1) {
-                    myTextView.setOnClickListener(mAddImpressOnClickListener);
+//                    myTextView.setOnClickListener(mAddImpressOnClickListener);
                 } else {
                     bean.setCheck(1);
                 }
@@ -289,6 +335,7 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
             myTextView.setBean(bean);
             mImpressGroup.addView(myTextView);
         }
+        findViewById(R.id.add_impress).setOnClickListener(mAddImpressOnClickListener);
     }
 
 
@@ -347,10 +394,12 @@ public class LiveUserHomeViewHolder extends AbsLivePageViewHolder implements App
             case R.id.btn_share:
                 share();
                 break;
-            case R.id.btn_fans:
+//            case R.id.btn_fans:
+            case R.id.ll_fans:
                 forwardFans();
                 break;
-            case R.id.btn_follow:
+//            case R.id.btn_follow:
+            case R.id.ll_follow:
                 forwardFollow();
                 break;
             case R.id.btn_follow_2:

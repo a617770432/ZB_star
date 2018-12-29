@@ -66,6 +66,7 @@
     <string name="fans_no_fans_2">TA还没有任何粉丝</string>
     <string name="find_pwd_forget">忘记密码</string>
     <string name="find_pwd_find">立即找回</string>
+    <string name="find_pwd_tip">请输入手机号，发送验证码重置密码</string>
 
     <string name="guard_choose_duration">选择守护时长</string>
     <string name="guard_right">选择特权</string>
@@ -140,6 +141,7 @@
     <string name="login_tip_2">服务和隐私条款</string>
     <string name="login_other_type">其他登录方式</string>
     <string name="login_tip_3">注册登录后体验更精彩!</string>
+    <string name="login_tip_4">请输入手机号密码加入我们吧！</string>
     <string name="login_input_phone">请输入手机号码</string>
     <string name="login_input_pwd">请输入密码</string>
     <string name="login_immediately_login">立即登录</string>
@@ -325,6 +327,7 @@
     <string name="profit_cash">立即提现</string>
 
     <string name="reg_register">注册</string>
+    <string name="reg_tips">请输入手机号验证码加入我们吧！</string>
     <string name="reg_input_phone">请输入您的手机号</string>
     <string name="reg_input_code">请输入验证码</string>
     <string name="reg_input_pwd_1">请填写密码</string>

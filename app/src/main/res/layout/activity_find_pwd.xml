@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_login"
+    android:orientation="vertical">
 
-    <include layout="@layout/view_title"/>
+    <include
+        layout="@layout/view_title"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_return"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:src="@mipmap/icon_return_white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="@string/find_pwd_forget"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:layout_marginLeft="35dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/find_pwd_tip"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginLeft="35dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        >
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="43dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="@drawable/login_input"
             >
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@mipmap/icon_reg_phone"
+                android:layout_marginStart="19dp"
                 />
 
             <EditText
@@ -40,26 +71,24 @@
                 android:maxLength="11"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/line2"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/login_input"
             >
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@mipmap/icon_reg_code"
+                android:layout_marginStart="19dp"
                 />
 
             <EditText
@@ -71,11 +100,10 @@
                 android:background="@null"
                 android:hint="@string/reg_input_code"
                 android:inputType="number"
-                android:maxLength="11"
+                android:maxLength="6"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/btn_code"
@@ -86,25 +114,25 @@
                 android:onClick="registerClick"
                 android:text="@string/reg_get_code"
                 android:textColor="@color/reg_btn_code"
-                android:textSize="16sp"
+                android:textSize="13sp"
+                android:layout_marginEnd="21dp"
                 />
         </LinearLayout>
 
-        <View
-            style="@style/line2"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="@drawable/login_input"
+            android:layout_marginTop="13dp"
             >
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@mipmap/icon_reg_pwd"
+                android:layout_marginStart="19dp"
                 />
 
             <EditText
@@ -118,26 +146,24 @@
                 android:maxLength="11"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/line2"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="@drawable/login_input"
+            android:layout_marginTop="13dp"
             >
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@mipmap/icon_reg_pwd"
+                android:layout_marginStart="19dp"
                 />
 
             <EditText
@@ -151,14 +177,10 @@
                 android:maxLength="11"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/line2"
-            />
     </LinearLayout>
 
     <TextView
@@ -168,12 +190,11 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/login_btn"
+        android:background="@drawable/layout_login_btn"
         android:enabled="false"
         android:gravity="center"
         android:onClick="registerClick"
         android:text="@string/find_pwd_find"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 </LinearLayout>

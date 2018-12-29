@@ -28,7 +28,7 @@ public class UserHomeActivity extends AbsActivity {
         if (TextUtils.isEmpty(toUid)) {
             return;
         }
-        mLiveUserHomeViewHolder = new LiveUserHomeViewHolder(mContext, (ViewGroup) findViewById(R.id.container));
+        mLiveUserHomeViewHolder = new LiveUserHomeViewHolder(mContext, (ViewGroup) findViewById(R.id.container) , this.getSupportFragmentManager());
         addAllLifeCycleListener(mLiveUserHomeViewHolder.getLifeCycleListenerList());
         mLiveUserHomeViewHolder.addToParent();
         mLiveUserHomeViewHolder.setToUid(toUid);
