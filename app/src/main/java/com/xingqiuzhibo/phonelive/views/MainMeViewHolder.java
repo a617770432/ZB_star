@@ -19,6 +19,7 @@ import com.xingqiuzhibo.phonelive.activity.FenxiaoWebViewActivity;
 import com.xingqiuzhibo.phonelive.activity.FollowActivity;
 import com.xingqiuzhibo.phonelive.activity.LiveRecordActivity;
 import com.xingqiuzhibo.phonelive.activity.MainActivity;
+import com.xingqiuzhibo.phonelive.activity.MyCertificationActivity;
 import com.xingqiuzhibo.phonelive.activity.MyCoinActivity;
 import com.xingqiuzhibo.phonelive.activity.MyProfitActivity;
 import com.xingqiuzhibo.phonelive.activity.SettingActivity;
@@ -180,6 +181,13 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
 
     @Override
     public void onItemClick(UserItemBean bean, int position) {
+
+        if(bean.getId() == 11){
+            Intent intent = new Intent(mContext , MyCertificationActivity.class);
+            mContext.startActivity(intent);
+            return;
+        }
+
         String url = bean.getHref();
         if (TextUtils.isEmpty(url)) {
             switch (bean.getId()) {

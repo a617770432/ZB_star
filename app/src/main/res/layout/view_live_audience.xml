@@ -61,6 +61,7 @@
             android:layout_toLeftOf="@id/btn_close"
             android:padding="5dp"
             android:src="@mipmap/icon_live_share"
+            android:visibility="gone"
             />
 
         <ImageView
