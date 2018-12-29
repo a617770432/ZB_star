@@ -1,6 +1,7 @@
 package com.xingqiuzhibo.phonelive.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
+import com.xingqiuzhibo.phonelive.activity.AppealContentActivity;
 import com.xingqiuzhibo.phonelive.activity.MoreWebViewActivity;
 import com.xingqiuzhibo.phonelive.activity.WebViewActivity;
 import com.xingqiuzhibo.phonelive.bean.CoinBean;
@@ -45,7 +47,7 @@ public class CoinAdapter extends RecyclerView.Adapter {
     private String mUid;
     private String mToken;
 
-    public CoinAdapter(Context context,  String coinName) {
+    public CoinAdapter(Context context, String coinName) {
         mContext = context;
         mList = new ArrayList<>();
         mGiveString = WordUtil.getString(R.string.coin_give);
@@ -61,8 +63,8 @@ public class CoinAdapter extends RecyclerView.Adapter {
             }
         };
         mLoadMoreHeight = DpUtil.dp2px(50);
-        mUid=AppConfig.getInstance().getUid();
-        mToken=AppConfig.getInstance().getToken();
+        mUid = AppConfig.getInstance().getUid();
+        mToken = AppConfig.getInstance().getToken();
     }
 
     public void insertList(List<CoinBean> list) {
@@ -83,7 +85,7 @@ public class CoinAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public void removePos(int pos){
+    public void removePos(int pos) {
         mList.remove(pos);
         notifyItemRemoved(pos);
         notifyItemRangeChanged(pos, mList.size());
@@ -92,6 +94,7 @@ public class CoinAdapter extends RecyclerView.Adapter {
 
     /**
      * 取消订单
+     *
      * @param orderno
      * @param pos
      */
@@ -104,8 +107,10 @@ public class CoinAdapter extends RecyclerView.Adapter {
         });
         removePos(pos);
     }
+
     /**
      * 取消申诉
+     *
      * @param appeal_id
      * @param pos
      */
@@ -118,6 +123,7 @@ public class CoinAdapter extends RecyclerView.Adapter {
         });
         removePos(pos);
     }
+
     public void setOnItemClickListener(OnItemClickListener<CoinBean> onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
@@ -149,12 +155,12 @@ public class CoinAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-            if (mType == 0) {
-                return CHARGE;
-            } else {
-                return ORDER;
-            }
+        if (mType == 0) {
+            return CHARGE;
+        } else {
+            return ORDER;
         }
+    }
 
     @Override
     public int getItemCount() {
@@ -221,8 +227,10 @@ public class CoinAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     if (mCoinBean.getStatus() == 0) {//未付款取消订单接口
                         cancelOrder(mCoinBean.getOrderno(), mPos);
-                    }else if (mCoinBean.getStatus()==2||mCoinBean.getStatus()==4){//订单申诉h5
-                        MoreWebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=appeal&uid="+mUid+"&token="+mToken+"&orderno="+mCoinBean.getOrderno());
+                    } else if (mCoinBean.getStatus() == 2 || mCoinBean.getStatus() == 4) {//订单申诉h5
+//                        Intent intent = new Intent(mContext, AppealContentActivity.class);
+//                        mContext.startActivity(intent);
+                        MoreWebViewActivity.forward(mContext, AppConfig.HOST + "/index.php?g=Appapi&m=Diamonds&a=appeal&uid=" + mUid + "&token=" + mToken + "&orderno=" + mCoinBean.getOrderno());
                     }
                 }
             });
@@ -237,7 +245,7 @@ public class CoinAdapter extends RecyclerView.Adapter {
             tv_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+mUid+"&token="+mToken+"&orderno="+mCoinBean.getOrderno());
+                    WebViewActivity.forward(mContext, AppConfig.HOST + "/index.php?g=Appapi&m=Diamonds&a=index&uid=" + mUid + "&token=" + mToken + "&orderno=" + mCoinBean.getOrderno());
                 }
             });
         }
@@ -259,16 +267,16 @@ public class CoinAdapter extends RecyclerView.Adapter {
                 tv_free.setTextColor(mContext.getResources().getColor(R.color.textColor));
                 tv_free.setBackgroundResource(R.drawable.bg_btn_coin_us);
                 tv_free.setText(WordUtil.getString(R.string.cancal_order));
-            } else if (status == 1 ) {
+            } else if (status == 1) {
                 tv_free.setVisibility(View.GONE);
                 tv_free2.setVisibility(View.GONE);
-            } else if (status == 2){
+            } else if (status == 2) {
                 tv_free.setVisibility(View.VISIBLE);
                 tv_free2.setVisibility(View.GONE);
                 tv_free.setTextColor(mContext.getResources().getColor(R.color.orange));
                 tv_free.setBackgroundResource(R.drawable.bg_btn_coin_s);
                 tv_free.setText(WordUtil.getString(R.string.order_appeal));
-            }else if (status==4){
+            } else if (status == 4) {
                 tv_free2.setVisibility(View.VISIBLE);//取消申诉
                 tv_free.setVisibility(View.VISIBLE);//继续申诉
                 tv_free.setTextColor(mContext.getResources().getColor(R.color.textColor));
@@ -279,7 +287,6 @@ public class CoinAdapter extends RecyclerView.Adapter {
         }
 
     }
-
 
 
 }

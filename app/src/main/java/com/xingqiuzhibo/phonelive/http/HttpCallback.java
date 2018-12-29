@@ -62,6 +62,7 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
     public void onError(Response<JsonBean> response) {
         Throwable t = response.getException();
         L.e("网络请求错误---->" + t.getClass() + " : " + t.getMessage());
+        L.e("uid---->" + AppConfig.getInstance().getUid() + " ____token " + AppConfig.getInstance().getToken());
         if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException || t instanceof UnknownServiceException || t instanceof SocketException) {
             ToastUtil.show(R.string.load_failure);
         }

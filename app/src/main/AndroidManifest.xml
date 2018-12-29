@@ -50,9 +50,8 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
@@ -166,22 +165,28 @@
         <activity
             android:name=".activity.FenxiaoWebViewActivity"
             android:screenOrientation="portrait" />
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AppealContentActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <!-- 微信登录回调页面 -->
+        <!--微信登录回调页面-->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 微信支付回调页面 -->
+        <!--微信支付回调页面-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--腾讯地图定位-->
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 腾讯地图定位 -->
         <meta-data
             android:name="TencentMapSDK"

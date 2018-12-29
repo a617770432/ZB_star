@@ -41,7 +41,7 @@ public class AppContext extends MultiDexApplication {
 //            sRefWatcher = LeakCanary.install(this);
 //        }
         //初始化腾讯bugly
-        CrashReport.initCrashReport(this);
+//        CrashReport.initCrashReport(this);
         CrashReport.setAppVersion(this,AppConfig.getInstance().getVersion());
         //初始化Http
         HttpUtil.init();

@@ -27,6 +27,7 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected String mTag;
     protected Context mContext;
     protected List<LifeCycleListener> mLifeCycleListeners;
+    public  static int SCREEN_WIDTH;
 
 
     @Override

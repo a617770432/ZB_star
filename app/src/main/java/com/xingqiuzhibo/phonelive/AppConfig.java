@@ -35,6 +35,7 @@ public class AppConfig {
     //域名
 //    public static final String HOST = "http://47.105.50.169";
     public static final String HOST = "http://www.xingqiupindao.com";
+//    public static final String HOST = "http://103.230.240.249";
     //public static final String HOST = "https://livenew.yunbaozhibo.com";
     //外部sd卡
     public static final String DCMI_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
@@ -448,6 +449,7 @@ public class AppConfig {
     public boolean isFrontGround() {
         return mFrontGround;
     }
+
     //app是否在前台
     public void setFrontGround(boolean frontGround) {
         mFrontGround = frontGround;

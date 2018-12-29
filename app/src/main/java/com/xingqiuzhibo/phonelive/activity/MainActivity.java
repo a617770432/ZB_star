@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -75,6 +76,14 @@ public class MainActivity extends AbsActivity {
 
     @Override
     protected void main() {
+
+        // 获取屏幕的宽高，设置为全局变量
+        DisplayMetrics outMetrics = new DisplayMetrics();
+
+        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+
+        AbsActivity.SCREEN_WIDTH = outMetrics.widthPixels;
+
         mFirstLogin = getIntent().getBooleanExtra(Constants.FIRST_LOGIN, false);
         mRootView = (ViewGroup) findViewById(R.id.rootView);
         mTabButtonGroup = (TabButtonGroup) findViewById(R.id.tab_group);

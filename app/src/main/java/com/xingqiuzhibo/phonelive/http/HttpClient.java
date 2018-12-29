@@ -21,7 +21,7 @@ import okhttp3.OkHttpClient;
 
 public class HttpClient {
 
-    private static final int TIMEOUT = 10000;
+    private static final int TIMEOUT = 30000;
     private static HttpClient sInstance;
     private OkHttpClient mOkHttpClient;
     private String mLanguage;//语言
