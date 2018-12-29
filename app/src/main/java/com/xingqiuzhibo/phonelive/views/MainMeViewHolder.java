@@ -178,13 +178,18 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
             }
         }
     }
-
+//13723865812  隐藏boss 拨打电话即可获得丰厚大礼
     @Override
     public void onItemClick(UserItemBean bean, int position) {
 
         if(bean.getId() == 11){
-            Intent intent = new Intent(mContext , MyCertificationActivity.class);
-            mContext.startActivity(intent);
+            String url = bean.getHref();
+            if(AppConfig.getInstance().getUserBean().getAuth_status() == null || TextUtils.isEmpty(AppConfig.getInstance().getUserBean().getAuth_status())){
+                Intent intent = new Intent(mContext , MyCertificationActivity.class);
+                mContext.startActivity(intent);
+            }else {
+                WebViewActivity.forward(mContext, url);
+            }
             return;
         }
 

@@ -173,7 +173,7 @@ public class HttpUtil {
                     public void onSuccess(int code, String msg, String[] info) {
                         if (code == 0 && info.length > 0) {
                             JSONObject obj = JSON.parseObject(info[0]);
-                            UserBean bean = JSON.toJavaObject(obj, UserBean.class);
+                            UserBean bean = JSON.toJavaObject(obj.getJSONObject("0"), UserBean.class);
                             AppConfig.getInstance().setUserBean(bean);
                             AppConfig.getInstance().setUserItemList(obj.getString("list"));
                             SpUtil.getInstance().setStringValue(SpUtil.USER_INFO, info[0]);
