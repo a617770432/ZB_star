@@ -92,6 +92,11 @@
             android:name=".activity.ModifyPwdActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.LoginWayActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/launcher"/>
+        <activity
             android:name=".activity.LiveAnchorActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />

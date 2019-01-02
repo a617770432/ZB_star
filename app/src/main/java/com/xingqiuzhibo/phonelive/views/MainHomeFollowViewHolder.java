@@ -46,7 +46,7 @@ public class MainHomeFollowViewHolder extends AbsMainChildTopViewHolder implemen
         super.init();
         mRefreshView = (RefreshView) findViewById(R.id.refreshView);
         mRefreshView.setNoDataLayoutId(R.layout.view_no_data_live_follow);
-        mRefreshView.setLayoutManager(new GridLayoutManager(mContext, 2, GridLayoutManager.VERTICAL, false));
+        mRefreshView.setLayoutManager(new GridLayoutManager(mContext, 1, GridLayoutManager.VERTICAL, false));
         ItemDecoration decoration = new ItemDecoration(mContext, 0x00000000, 5, 5);
         decoration.setOnlySetItemOffsetsButNoDraw(true);
         mRefreshView.setItemDecoration(decoration);

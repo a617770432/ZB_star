@@ -32,6 +32,7 @@ import com.xingqiuzhibo.phonelive.utils.SpUtil;
 public class LauncherActivity extends AppCompatActivity {
     private Handler mHandler;
     protected Context mContext;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +96,10 @@ public class LauncherActivity extends AppCompatActivity {
                 }
             });
         } else {
-            LoginActivity.forward();
+//            LoginActivity.forward();
+            Intent intent = new Intent(this, LoginWayActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
