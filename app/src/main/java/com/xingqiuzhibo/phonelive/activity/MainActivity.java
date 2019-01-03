@@ -148,7 +148,6 @@ public class MainActivity extends AbsActivity {
         AppConfig.getInstance().setLaunched(true);
 
 
-
     }
 
     public void mainClick(View v) {
@@ -307,15 +306,15 @@ public class MainActivity extends AbsActivity {
                 int notificationType = ImPushUtil.getInstance().getNotificationType();
                 switch (notificationType) {
                     case Constants.JPUSH_TYPE_LIVE:
-                        mvh.setCurrentPage(0);
+                        mvh.setCurrentPage(1);
                         break;
                     case Constants.JPUSH_TYPE_MESSAGE:
-                        mvh.setCurrentPage(1);
+                        mvh.setCurrentPage(0);
                         ChatActivity.forward(mContext);
                         break;
                 }
             } else {
-                mvh.setCurrentPage(1);
+                mvh.setCurrentPage(0);
             }
             getLocation();
         }

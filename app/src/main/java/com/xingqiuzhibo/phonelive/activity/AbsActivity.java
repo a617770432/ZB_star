@@ -27,13 +27,14 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected String mTag;
     protected Context mContext;
     protected List<LifeCycleListener> mLifeCycleListeners;
-    public  static int SCREEN_WIDTH;
+    public static int SCREEN_WIDTH;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTag = this.getClass().getSimpleName();
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         setStatusBar();
         setContentView(getLayoutId());
         mContext = this;
@@ -51,7 +52,7 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected void main(Bundle savedInstanceState) {
         try {
             main();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 

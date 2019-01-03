@@ -48,6 +48,7 @@ public class LauncherActivity extends AppCompatActivity {
             return;
         }
         setStatusBar();
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_launcher);
         mContext = this;
         ImageView imageView = (ImageView) findViewById(R.id.img);

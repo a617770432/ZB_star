@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
 
 /**
@@ -25,6 +24,7 @@ public class LoginWayActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBar();
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_login_way);
         LinearLayout loginWay = findViewById(R.id.login_way);
         loginWay.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +32,7 @@ public class LoginWayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginWayActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
