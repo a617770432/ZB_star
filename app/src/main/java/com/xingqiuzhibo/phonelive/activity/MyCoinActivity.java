@@ -262,7 +262,12 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
                 if (code == 0 && info.length > 0) {
                     JSONObject obj = JSON.parseObject(info[0]);
                     String orderInfo = obj.getString("orderid");
-                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+AppConfig.getInstance().getUid()+"&token="+AppConfig.getInstance().getToken()+"&orderno="+orderInfo);
+
+                    //改
+                    Intent intent = new Intent(MyCoinActivity.this , OrderDetailActivity.class);
+                    intent.putExtra("orderid",orderInfo);
+                    startActivity(intent);
+//                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+AppConfig.getInstance().getUid()+"&token="+AppConfig.getInstance().getToken()+"&orderno="+orderInfo);
                 }else {
                     ToastUtil.show(msg);
                 }

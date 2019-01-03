@@ -476,4 +476,7 @@
     <string name="liangli">靓丽</string>
     <string name="tianmei">甜美</string>
     <string name="huaijiu">怀旧</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

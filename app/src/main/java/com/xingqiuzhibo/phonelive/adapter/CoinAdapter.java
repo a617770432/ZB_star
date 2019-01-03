@@ -14,6 +14,7 @@ import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.activity.AppealContentActivity;
 import com.xingqiuzhibo.phonelive.activity.MoreWebViewActivity;
+import com.xingqiuzhibo.phonelive.activity.OrderDetailActivity;
 import com.xingqiuzhibo.phonelive.activity.WebViewActivity;
 import com.xingqiuzhibo.phonelive.bean.CoinBean;
 import com.xingqiuzhibo.phonelive.glide.ImgLoader;
@@ -245,7 +246,13 @@ public class CoinAdapter extends RecyclerView.Adapter {
             tv_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    WebViewActivity.forward(mContext, AppConfig.HOST + "/index.php?g=Appapi&m=Diamonds&a=index&uid=" + mUid + "&token=" + mToken + "&orderno=" + mCoinBean.getOrderno());
+
+                    //改
+                    Intent intent = new Intent(mContext , OrderDetailActivity.class);
+                    intent.putExtra("orderid",mCoinBean.getOrderno());
+                    mContext.startActivity(intent);
+//                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+mUid+"&token="+mToken+"&orderno="+mCoinBean.getOrderno());
+
                 }
             });
         }

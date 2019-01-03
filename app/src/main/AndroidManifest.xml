@@ -93,9 +93,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginWayActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTop"
-            android:theme="@style/launcher"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/launcher" />
         <activity
             android:name=".activity.LiveAnchorActivity"
             android:screenOrientation="portrait"
@@ -178,19 +178,19 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <!--微信登录回调页面-->
+        <!-- 微信登录回调页面 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--微信支付回调页面-->
+        <!-- 微信支付回调页面 -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--腾讯地图定位-->
+        <!-- 腾讯地图定位 -->
         android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 腾讯地图定位 -->
         <meta-data
@@ -284,7 +284,8 @@
             android:value="yunbao_js" />
         <!-- 友盟统计 end -->
         <activity android:name=".activity.MyCertificationActivity" />
-        <activity android:name=".activity.CertificationStepTwoActivity"></activity>
+        <activity android:name=".activity.CertificationStepTwoActivity" />
+        <activity android:name=".activity.OrderDetailActivity"></activity>
     </application>
 
 </manifest>
