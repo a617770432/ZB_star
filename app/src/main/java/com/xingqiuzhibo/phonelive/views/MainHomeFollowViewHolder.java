@@ -85,7 +85,6 @@ public class MainHomeFollowViewHolder extends AbsMainChildTopViewHolder implemen
 
             @Override
             public void onNoData(boolean noData) {
-
             }
 
             @Override
