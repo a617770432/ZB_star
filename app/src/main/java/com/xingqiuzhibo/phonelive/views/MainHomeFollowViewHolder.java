@@ -1,12 +1,16 @@
 package com.xingqiuzhibo.phonelive.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
+import com.xingqiuzhibo.phonelive.activity.LoginActivity;
+import com.xingqiuzhibo.phonelive.activity.LoginWayActivity;
 import com.xingqiuzhibo.phonelive.adapter.MainHomeHotAdapter;
 import com.xingqiuzhibo.phonelive.adapter.RefreshAdapter;
 import com.xingqiuzhibo.phonelive.bean.LiveBean;
@@ -104,6 +108,11 @@ public class MainHomeFollowViewHolder extends AbsMainChildTopViewHolder implemen
 
     @Override
     public void onItemClick(LiveBean bean, int position) {
+        if (null == AppConfig.getInstance().getToken()) {
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            mContext.startActivity(intent);
+            return;
+        }
         watchLive(bean);
     }
 }

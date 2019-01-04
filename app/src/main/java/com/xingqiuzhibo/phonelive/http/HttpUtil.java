@@ -206,6 +206,17 @@ public class HttpUtil {
     }
 
     /**
+     * 游客登录
+     * @param mac
+     * @param callback
+     */
+    public static void visitorLogin(String mac, HttpCallback callback) {
+        HttpClient.getInstance().get("Login.visitorLogin", HttpConsts.LOGIN)
+                .params("user_login", mac)
+                .execute(callback);
+    }
+
+    /**
      * 第三方登录
      */
     public static void loginByThird(String openid, String nicename, String avatar, String type, HttpCallback callback) {
@@ -1523,7 +1534,7 @@ public class HttpUtil {
      * @param stream
      * @param callback
      */
-    public static void dragonVotes(String stream,String liveuid,int part,int coin, HttpCallback callback) {
+    public static void dragonVotes(String stream, String liveuid, int part, int coin, HttpCallback callback) {
         HttpClient.getInstance().get("Game.Dragonvotes", HttpConsts.GAME_LH_VOTES)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
@@ -1536,11 +1547,12 @@ public class HttpUtil {
 
     /**
      * 本轮游戏投注记录
+     *
      * @param stream
      * @param liveuid
      * @param callback
      */
-    public static void dragonLogByuser(String stream,String liveuid, HttpCallback callback) {
+    public static void dragonLogByuser(String stream, String liveuid, HttpCallback callback) {
         HttpClient.getInstance().get("Game.Dragonlogbyuser", HttpConsts.GAME_LH_RECORD)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())

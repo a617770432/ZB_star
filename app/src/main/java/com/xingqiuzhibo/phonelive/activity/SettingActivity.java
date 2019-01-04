@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.umeng.analytics.MobclickAgent;
 import com.xingqiuzhibo.phonelive.AppConfig;
+import com.xingqiuzhibo.phonelive.AppContext;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.adapter.SettingAdapter;
@@ -114,7 +115,10 @@ public class SettingActivity extends AbsActivity implements OnItemClickListener<
         AppConfig.getInstance().clearLoginInfo();
         //友盟统计登出
         MobclickAgent.onProfileSignOff();
-        LoginActivity.forward();
+        Intent intent = new Intent(this,LoginWayActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        AppContext.sInstance.startActivity(intent);
+//        LoginActivity.forward();
     }
 
     /**

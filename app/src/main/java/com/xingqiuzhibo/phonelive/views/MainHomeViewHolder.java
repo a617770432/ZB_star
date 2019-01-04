@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.activity.LiveClassActivity;
+import com.xingqiuzhibo.phonelive.activity.LoginWayActivity;
 import com.xingqiuzhibo.phonelive.adapter.MainHomeLiveClassAdapter;
 import com.xingqiuzhibo.phonelive.adapter.ViewPagerAdapter;
 import com.xingqiuzhibo.phonelive.bean.ConfigBean;
@@ -25,6 +27,7 @@ import com.xingqiuzhibo.phonelive.interfaces.LifeCycleAdapter;
 import com.xingqiuzhibo.phonelive.interfaces.LifeCycleListener;
 import com.xingqiuzhibo.phonelive.interfaces.MainAppBarExpandListener;
 import com.xingqiuzhibo.phonelive.interfaces.OnItemClickListener;
+import com.xingqiuzhibo.phonelive.utils.ToastUtil;
 import com.xingqiuzhibo.phonelive.utils.WordUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -85,7 +88,7 @@ public class MainHomeViewHolder extends AbsMainParentViewHolder implements OnIte
         }
         mViewPager.setAdapter(new ViewPagerAdapter(list));
         mIndicator.setTitles(new String[]{
-                WordUtil.getString(R.string.follow), WordUtil.getString(R.string.live)
+                WordUtil.getString(R.string.live), WordUtil.getString(R.string.follow)
                 //WordUtil.getString(R.string.video)
         });
         mIndicator.setViewPager(mViewPager);
