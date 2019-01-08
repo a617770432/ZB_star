@@ -1,5 +1,7 @@
 package com.xingqiuzhibo.phonelive;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +11,7 @@ import android.util.SparseArray;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xingqiuzhibo.phonelive.activity.LoginActivity;
 import com.xingqiuzhibo.phonelive.bean.ConfigBean;
 import com.xingqiuzhibo.phonelive.bean.LevelBean;
 import com.xingqiuzhibo.phonelive.bean.LiveGiftBean;
@@ -35,7 +38,11 @@ public class AppConfig {
     //域名
 //    public static final String HOST = "http://47.105.50.169";
     public static final String HOST = "http://www.xingqiupindao.com";
-//    public static final String HOST = "http://103.230.240.249";
+
+    //域名java服务器
+    public static final String BASE_URL = "http://39.104.69.120:8585/xqpd/tdapp/";
+//    public static final String BASE_URL = "http://192.168.1.158:8585/xqpd/tdapp/";
+    //    public static final String HOST = "http://103.230.240.249";
     //public static final String HOST = "https://livenew.yunbaozhibo.com";
     //外部sd卡
     public static final String DCMI_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
@@ -453,5 +460,14 @@ public class AppConfig {
     //app是否在前台
     public void setFrontGround(boolean frontGround) {
         mFrontGround = frontGround;
+    }
+
+    public boolean checkToken(Context context) {
+        if (null == getToken()) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+            return false;
+        }
+        return true;
     }
 }

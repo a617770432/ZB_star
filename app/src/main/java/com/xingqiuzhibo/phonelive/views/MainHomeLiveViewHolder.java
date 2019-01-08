@@ -138,12 +138,9 @@ public class MainHomeLiveViewHolder extends AbsMainChildTopViewHolder implements
 
     @Override
     public void onItemClick(LiveBean bean, int position) {
-        if (null == AppConfig.getInstance().getToken()) {
-            Intent intent = new Intent(mContext, LoginActivity.class);
-            mContext.startActivity(intent);
-            return;
+        if (AppConfig.getInstance().checkToken(mContext)) {
+            watchLive(bean);
         }
-        watchLive(bean);
     }
 
     @Override

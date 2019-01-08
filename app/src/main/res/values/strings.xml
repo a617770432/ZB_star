@@ -15,11 +15,13 @@
     <string name="cash_input_bank_account">请输入银行卡账号</string>
     <string name="cash_input_bank_name">请输入银行名称</string>
     <string name="cash_input_wx_account">请输入微信账号</string>
+    <string name="cash_input_usdt_account">请输入USDT地址</string>
     <string name="cash_input_ali_account">请输入支付宝账号</string>
     <string name="cash_input_ali_name">请输入支付宝账号姓名</string>
     <string name="cash_type_ali">支付宝</string>
     <string name="cash_type_wx">微信</string>
     <string name="cash_type_bank">银行卡</string>
+    <string name="cash_type_usdt">USDT</string>
     <string name="cash_delete">是否要删除该账户？</string>
     <string name="cash_record">提现记录</string>
     <string name="coin_give">赠送</string>

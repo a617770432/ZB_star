@@ -51,6 +51,7 @@ public class IconUtil {
         sCashTypeMap.put(Constants.CASH_ACCOUNT_ALI, R.mipmap.icon_cash_ali);
         sCashTypeMap.put(Constants.CASH_ACCOUNT_WX, R.mipmap.icon_cash_wx);
         sCashTypeMap.put(Constants.CASH_ACCOUNT_BANK, R.mipmap.icon_cash_bank);
+        sCashTypeMap.put(Constants.CASH_ACCOUNT_USDT, R.mipmap.icon_cash_usdt);
 
         sLinkMicPkAnim = Arrays.asList(
                 R.mipmap.pk01,

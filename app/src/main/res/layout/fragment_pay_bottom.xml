@@ -47,7 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginTop="14dp"
-            android:text="订单号: 180704385723685"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -57,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="订单时间： 2018-11-21 22:10"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
@@ -72,7 +70,6 @@
                 android:id="@+id/tv_order_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订单金额： ￥10.03"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -81,7 +78,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="88dp"
-                android:text="数量： 20"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 

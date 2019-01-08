@@ -56,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="28dp"
                         android:background="@null"
+                        android:singleLine="true"
                         android:hint="请填写您的真实姓名"
                         android:inputType="text"
                         android:textSize="14sp" />
@@ -88,6 +89,7 @@
                         android:layout_marginStart="28dp"
                         android:background="@null"
                         android:hint="请填写您的手机号"
+                        android:maxLength="11"
                         android:inputType="phone"
                         android:textSize="14sp" />
 

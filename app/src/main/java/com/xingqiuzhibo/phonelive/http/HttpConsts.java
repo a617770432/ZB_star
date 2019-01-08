@@ -141,4 +141,9 @@ public class HttpConsts {
     public static final String GAME_LH_RECORD= "Dragonlogbyuser";
     public static final String GAME_LH_OVER= "Dragonover";
     public static final String GAME_LH_END= "Dragonend";
+
+
+    //新增
+    //订单详情及支付方式列表
+    public static final String ORDER_DETAIL_PAY_WAY= "OrderMsg";
 }

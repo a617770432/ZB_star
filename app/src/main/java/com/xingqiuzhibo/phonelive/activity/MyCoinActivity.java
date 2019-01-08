@@ -265,7 +265,7 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
 
                     //改
                     Intent intent = new Intent(MyCoinActivity.this , OrderDetailActivity.class);
-                    intent.putExtra("orderid",orderInfo);
+                    intent.putExtra("order_id",orderInfo);
                     startActivity(intent);
 //                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+AppConfig.getInstance().getUid()+"&token="+AppConfig.getInstance().getToken()+"&orderno="+orderInfo);
                 }else {

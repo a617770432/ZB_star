@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
@@ -25,24 +29,28 @@ import com.xingqiuzhibo.phonelive.bean.UserBean;
 import com.xingqiuzhibo.phonelive.glide.ImgLoader;
 import com.xingqiuzhibo.phonelive.http.HttpCallback;
 import com.xingqiuzhibo.phonelive.http.HttpUtil;
+import com.xingqiuzhibo.phonelive.http.NetWork;
 import com.xingqiuzhibo.phonelive.interfaces.ImageResultCallback;
 import com.xingqiuzhibo.phonelive.utils.DialogUitl;
 import com.xingqiuzhibo.phonelive.utils.ProcessImageUtil;
 import com.xingqiuzhibo.phonelive.utils.ToastUtil;
+import com.xingqiuzhibo.phonelive.utils.UrlUtil;
 
 import org.json.JSONException;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CertificationStepTwoActivity extends AbsActivity implements View.OnClickListener {
 
     private ProcessImageUtil mImageUtil;
     private AppCompatImageView ivZhengmian, ivBeimian, ivHand;
     private int clickType;
-    private String zhengmianStr , beimianStr , handStr;
-    private EditText etRealName , etPhone , etCard;
+    private String zhengmianStr, beimianStr, handStr;
+    private EditText etRealName, etPhone, etCard;
     private TextView tvRenzheng;
 
     private Dialog dialog;
@@ -81,31 +89,38 @@ public class CertificationStepTwoActivity extends AbsActivity implements View.On
             @Override
             public void onSuccess(File file) {
                 if (file != null) {
-                    if(clickType == 0){
+                    if (clickType == 0) {
                         ImgLoader.display(file, ivZhengmian);
-                    }else if (clickType == 1){
+                    } else if (clickType == 1) {
                         ImgLoader.display(file, ivBeimian);
-                    }else if (clickType == 2){
+                    } else if (clickType == 2) {
                         ImgLoader.display(file, ivHand);
                     }
 
                     dialog.show();
-                    OkGo.<String>post("http://www.xingqiupindao.com/index.php?g=Appapi&m=Auth&a=upload")
+//                    OkGo.<String>post("http://www.xingqiupindao.com/index.php?g=Appapi&m=Auth&a=upload")
+                    OkGo.<String>post(AppConfig.BASE_URL + "base/file/upload")
                             .tag(this)
-                            .params("file" , file)
+                            .params("file", file)
+                            .params("type", 1)
+                            .params("userId", AppConfig.getInstance().getUid())
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     try {
                                         org.json.JSONObject jsonObject = new org.json.JSONObject(response.body());
-                                        org.json.JSONObject data = jsonObject.optJSONObject("data");
-                                        String url = data.optString("url");
-
-                                        if(clickType == 0){
+                                        if (jsonObject.getInt("code") != 0) {
+                                            ToastUtil.show("图片上传失败！");
+                                            return;
+                                        }
+//                                            org.json.JSONObject data = jsonObject.optJSONObject("data");
+                                        String url = jsonObject.optString("url");
+                                        Log.e("图片提交返回数据：", url);
+                                        if (clickType == 0) {
                                             zhengmianStr = url;
-                                        }else if (clickType == 1){
+                                        } else if (clickType == 1) {
                                             beimianStr = url;
-                                        }else if (clickType == 2){
+                                        } else if (clickType == 2) {
                                             handStr = url;
                                         }
 
@@ -144,75 +159,108 @@ public class CertificationStepTwoActivity extends AbsActivity implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_zhengmian:
-                clickType = 0 ;
+                clickType = 0;
                 break;
             case R.id.iv_beimian:
-                clickType = 1 ;
+                clickType = 1;
                 break;
             case R.id.iv_hand:
-                clickType = 2 ;
+                clickType = 2;
                 break;
             case R.id.tv_renzheng:
-                if(TextUtils.isEmpty(etRealName.getText().toString())){
-                    Toast.makeText(this , "真实姓名不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(etRealName.getText().toString())) {
+                    Toast.makeText(this, "真实姓名不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(etPhone.getText().toString())){
-                    Toast.makeText(this , "电话号码不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(etPhone.getText().toString())) {
+                    Toast.makeText(this, "电话号码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(etCard.getText().toString())){
-                    Toast.makeText(this , "身份证号不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(etCard.getText().toString())) {
+                    Toast.makeText(this, "身份证号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(zhengmianStr)){
-                    Toast.makeText(this , "证件正面照片不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(zhengmianStr)) {
+                    Toast.makeText(this, "证件正面照片不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(beimianStr)){
-                    Toast.makeText(this , "证件背面照片不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(beimianStr)) {
+                    Toast.makeText(this, "证件背面照片不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(handStr)){
-                    Toast.makeText(this , "手持证件正面照片不能为空" , Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(handStr)) {
+                    Toast.makeText(this, "手持证件正面照片不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 dialog.show();
 
                 String uid = AppConfig.getInstance().getUid();
-                OkGo.<String>get("http://www.xingqiupindao.com/index.php?g=Appapi&m=Auth&a=authsave")
-                        .tag(this)
-                        .params("uid" , uid)
-                        .params("token" , AppConfig.getInstance().getToken())
-                        .params("real_name" , etRealName.getText().toString().trim())
-                        .params("mobile" , etPhone.getText().toString().trim())
-                        .params("cer_no" , etCard.getText().toString().trim())
-                        .params("front_view" , zhengmianStr)
-                        .params("back_view" , beimianStr)
-                        .params("handset_view" , handStr)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                dialog.dismiss();
-                                String str = response.body();
-                                try {
-                                    org.json.JSONObject jsonObject = new org.json.JSONObject(str);
-                                    Integer ret = jsonObject.optInt("ret");
-                                    if(ret == 200){
-                                        Toast.makeText(CertificationStepTwoActivity.this , "提交成功，请耐心等待审核" , Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(CertificationStepTwoActivity.this , MainActivity.class);
-                                        startActivity(intent);
-                                        onBackPressed();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+                Map<String, Object> map = new HashMap<>();
+                map.put("uid", uid);
+                map.put("realName", etRealName.getText().toString().trim());
+                map.put("mobile", etPhone.getText().toString().trim());
+                map.put("cerNo", etCard.getText().toString().trim());
+                map.put("frontView", zhengmianStr);
+                map.put("backView", beimianStr);
+                map.put("handsetView", handStr);
+                NetWork.httpPost(UrlUtil.UPDATE_PERSONAL_INFO, map, mContext, request);
+
+
+//                OkGo.<String>get("http://www.xingqiupindao.com/index.php?g=Appapi&m=Auth&a=authsave")
+//                        .tag(this)
+//                        .params("uid", uid)
+//                        .params("token", AppConfig.getInstance().getToken())
+//                        .params("real_name", etRealName.getText().toString().trim())
+//                        .params("mobile", etPhone.getText().toString().trim())
+//                        .params("cer_no", etCard.getText().toString().trim())
+//                        .params("front_view", zhengmianStr)
+//                        .params("back_view", beimianStr)
+//                        .params("handset_view", handStr)
+//                        .execute(new StringCallback() {
+//                            @Override
+//                            public void onSuccess(Response<String> response) {
+//                                dialog.dismiss();
+//                                String str = response.body();
+//                                try {
+//                                    org.json.JSONObject jsonObject = new org.json.JSONObject(str);
+//                                    Integer ret = jsonObject.optInt("ret");
+//                                    if (ret == 200) {
+//                                        Toast.makeText(CertificationStepTwoActivity.this, "提交成功，请耐心等待审核", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(CertificationStepTwoActivity.this, MainActivity.class);
+//                                        startActivity(intent);
+//                                        onBackPressed();
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        });
 
                 return;
         }
         editAvatar();
     }
+
+    RequestCallBack<String> request = new RequestCallBack<String>() {
+        @Override
+        public void onSuccess(ResponseInfo<String> responseInfo) {
+            JSONObject jsb = JSON.parseObject(responseInfo.result);
+            Integer code = jsb.getInteger("code");
+            if (code == 0) {
+                ToastUtil.show("信息提交成功");
+                finish();
+            } else {
+                ToastUtil.show(jsb.getString("msg"));
+            }
+            if (null != dialog)
+                dialog.dismiss();
+        }
+
+        @Override
+        public void onFailure(HttpException e, String s) {
+            if (null != dialog)
+                dialog.dismiss();
+        }
+    };
 }

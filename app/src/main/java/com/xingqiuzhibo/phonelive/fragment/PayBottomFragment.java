@@ -18,17 +18,22 @@ import com.xingqiuzhibo.phonelive.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PayBottomFragment extends BottomSheetDialogFragment implements View.OnClickListener{
+public class PayBottomFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private TextView orderNum;
     private TextView orderTime;
     private TextView orderCount;
     private TextView orderMoney;
     private TextView btn;
-    private RelativeLayout rlBank , rlWechat , rlAlipay;
-    private AppCompatImageView ivBank , ivWechat , ivAlipay;
+    private RelativeLayout rlBank, rlWechat, rlAlipay;
+    private AppCompatImageView ivBank, ivWechat, ivAlipay;
 
-    private int payType = 1;//支付类型  1 银行卡  2 wechat 3 alipay
+    private String mOrderNum, mTime, mCoin;
+    private float mMoney;
+    private String typeAlipay, typeWechat, typeBank, mAccount;
+
+    //1表示支付宝，2表示微信，3表示银行卡'
+    private int payType = 3;
 
     public PayBottomFragment() {
         // Required empty public constructor
@@ -37,8 +42,14 @@ public class PayBottomFragment extends BottomSheetDialogFragment implements View
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null){
-
+        if (getArguments() != null) {
+            mOrderNum = getArguments().getString("order_num");
+            mMoney = getArguments().getFloat("pay_money");
+            typeAlipay = getArguments().getString("type_alipay");
+            typeWechat = getArguments().getString("type_wechat");
+            typeBank = getArguments().getString("type_bank");
+            mTime = getArguments().getString("order_time");
+            mCoin = getArguments().getString("order_coin");
         }
 
     }
@@ -75,40 +86,51 @@ public class PayBottomFragment extends BottomSheetDialogFragment implements View
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onPayTypeClick(payType);
+                listener.onPayTypeClick(payType, mAccount);
                 dismiss();
             }
         });
 
+        setMsg();
         return view;
+    }
+
+    private void setMsg() {
+        orderNum.setText("订单号:" + mOrderNum);
+        orderTime.setText("订单时间：" + mTime);
+        orderMoney.setText("订单金额：" + mMoney);
+        orderCount.setText("数量：" + mCoin);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.rl_bank:
                 ivBank.setImageResource(R.mipmap.icon_radio);
                 ivWechat.setImageResource(R.mipmap.icon_radio01);
                 ivAlipay.setImageResource(R.mipmap.icon_radio01);
-                payType = 1;
+                payType = 3;
+                mAccount = typeBank;
                 break;
             case R.id.rl_alipay:
                 ivAlipay.setImageResource(R.mipmap.icon_radio);
                 ivWechat.setImageResource(R.mipmap.icon_radio01);
                 ivBank.setImageResource(R.mipmap.icon_radio01);
-                payType = 3;
+                payType = 1;
+                mAccount = typeAlipay;
                 break;
             case R.id.rl_wechat:
                 ivWechat.setImageResource(R.mipmap.icon_radio);
                 ivBank.setImageResource(R.mipmap.icon_radio01);
                 ivAlipay.setImageResource(R.mipmap.icon_radio01);
                 payType = 2;
+                mAccount = typeWechat;
                 break;
         }
     }
 
     public interface OnItemClickListener {
-        void onPayTypeClick(int type);
+        void onPayTypeClick(int type, String account);
     }
 
     private OnItemClickListener listener;

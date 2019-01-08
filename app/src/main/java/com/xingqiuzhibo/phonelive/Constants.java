@@ -135,10 +135,11 @@ public class Constants {
     public static final int SOCKET_USER_TYPE_ANCHOR = 50;//主播
     public static final int SOCKET_USER_TYPE_SUPER = 60;//超管
 
-    //提现账号类型，1表示支付宝，2表示微信，3表示银行卡
+    //提现账号类型，1表示支付宝，2表示微信，3表示银行卡,4表示USDT地址
     public static final int CASH_ACCOUNT_ALI = 1;
     public static final int CASH_ACCOUNT_WX = 2;
     public static final int CASH_ACCOUNT_BANK = 3;
+    public static final int CASH_ACCOUNT_USDT = 4;
     public static final String CASH_ACCOUNT_ID = "cashAccountID";
     public static final String CASH_ACCOUNT = "cashAccount";
     public static final String CASH_ACCOUNT_TYPE = "cashAccountType";

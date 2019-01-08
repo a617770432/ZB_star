@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:background="@color/white"
-        android:paddingTop="19dp"
-        >
+        android:paddingTop="19dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/titleView"
@@ -26,8 +25,7 @@
                 android:text="@string/profit"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/btn_back"
@@ -37,8 +35,7 @@
                 android:onClick="backClick"
                 android:padding="9dp"
                 android:src="@mipmap/icon_back"
-                android:tint="@color/textColor"
-                />
+                android:tint="@color/textColor" />
 
             <TextView
                 android:id="@+id/btn_cash_record"
@@ -50,10 +47,37 @@
                 android:padding="5dp"
                 android:text="@string/cash_record"
                 android:textColor="@color/gray1"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
         </RelativeLayout>
     </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/sliding_tab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        app:tl_indicator_color="@color/yellow"
+        app:tl_indicator_corner_radius="1dp"
+        app:tl_indicator_gravity="BOTTOM"
+        app:tl_indicator_height="2dp"
+        app:tl_indicator_style="NORMAL"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_space_equal="true"
+        app:tl_textSelectColor="@color/black"
+        app:tl_textUnselectColor="@color/coin_text"
+        app:tl_textsize="17sp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,16 +88,14 @@
         android:layout_marginTop="10dp"
         android:background="@mipmap/icon_profit_1"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/all_name"
@@ -81,8 +103,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/all"
@@ -94,8 +115,7 @@
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="22sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -104,16 +124,14 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="25dp"
             android:layout_marginTop="25dp"
-            android:background="@color/white"
-            />
+            android:background="@color/white" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/can_name"
@@ -121,8 +139,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/can"
@@ -134,8 +151,7 @@
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="22sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
@@ -146,8 +162,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/bg_dialog_2"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,16 +170,14 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            >
+            android:paddingRight="15dp">
 
             <TextView
                 android:id="@+id/get_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor2"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edit"
@@ -177,16 +190,14 @@
                 android:inputType="number"
                 android:textColor="@color/global"
                 android:textColorHint="#dcdcdc"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray2"
-            />
+            android:background="@color/gray2" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -194,16 +205,14 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            >
+            android:paddingRight="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profit_get_money"
                 android:textColor="@color/textColor2"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/money"
@@ -230,8 +239,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_dialog_2"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        >
+        android:paddingRight="15dp">
 
         <TextView
             android:id="@+id/choose_tip"
@@ -241,16 +249,14 @@
             android:text="@string/profit_choose_account"
             android:textColor="@color/textColor2"
             android:textSize="14sp"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
 
         <ImageView
             android:layout_width="16dp"
             android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/icon_arrow_right"
-            />
+            android:src="@mipmap/icon_arrow_right" />
 
         <LinearLayout
             android:id="@+id/account_group"
@@ -258,15 +264,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:orientation="horizontal"
-            android:visibility="invisible"
-            >
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/account_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/icon_cash_ali"
-                />
+                android:src="@mipmap/icon_cash_ali" />
 
             <TextView
                 android:id="@+id/account"
@@ -276,8 +280,7 @@
                 android:layout_marginLeft="10dp"
                 android:singleLine="true"
                 android:textColor="@color/textColor2"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -293,8 +296,7 @@
         android:gravity="center"
         android:text="@string/profit_cash"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tip"
@@ -304,7 +306,6 @@
         android:layout_marginRight="55dp"
         android:layout_marginTop="15dp"
         android:textColor="@color/gray1"
-        android:textSize="12sp"
-        />
+        android:textSize="12sp" />
 
 </LinearLayout>

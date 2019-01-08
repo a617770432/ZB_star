@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
+import com.xingqiuzhibo.phonelive.activity.CertificationConfirmActivity;
+import com.xingqiuzhibo.phonelive.activity.CertificationFailActivity;
+import com.xingqiuzhibo.phonelive.activity.CertificationSuccessActivity;
 import com.xingqiuzhibo.phonelive.activity.EditProfileActivity;
 import com.xingqiuzhibo.phonelive.activity.FansActivity;
 import com.xingqiuzhibo.phonelive.activity.FenxiaoWebViewActivity;
@@ -178,18 +182,35 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
             }
         }
     }
+
     //
     @Override
     public void onItemClick(UserItemBean bean, int position) {
 
-        if(bean.getId() == 11){
+        if (bean.getId() == 11) {
             //我的认证
             String url = bean.getHref();
-            if(AppConfig.getInstance().getUserBean().getAuth_status() == null || TextUtils.isEmpty(AppConfig.getInstance().getUserBean().getAuth_status())){
-                Intent intent = new Intent(mContext , MyCertificationActivity.class);
+            Log.e("TAG", AppConfig.getInstance().getUserBean().getAuth_status());
+            if (AppConfig.getInstance().getUserBean().getAuth_status() == null || TextUtils.isEmpty(AppConfig.getInstance().getUserBean().getAuth_status())) {
+                //未认证
+                Intent intent = new Intent(mContext, MyCertificationActivity.class);
                 mContext.startActivity(intent);
-            }else {
-                WebViewActivity.forward(mContext, url);
+            } else {
+                if (AppConfig.getInstance().getUserBean().getAuth_status().equals("2")) {
+                    //认证失败
+                    Intent intent = new Intent(mContext, CertificationFailActivity.class);
+                    mContext.startActivity(intent);
+                } else if (AppConfig.getInstance().getUserBean().getAuth_status().equals("1")) {
+                    //认证成功
+                    Intent intent = new Intent(mContext, CertificationSuccessActivity.class);
+                    mContext.startActivity(intent);
+                } else if (AppConfig.getInstance().getUserBean().getAuth_status().equals("0")) {
+                    //审核中
+                    Intent intent = new Intent(mContext, CertificationConfirmActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    WebViewActivity.forward(mContext, url);
+                }
             }
             return;
         }
@@ -212,10 +233,10 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
 
             }
         } else {
-            if (bean.getId()==8){
+            if (bean.getId() == 8) {
                 //我的分销
-                FenxiaoWebViewActivity.forward(mContext,url);
-            }else {
+                FenxiaoWebViewActivity.forward(mContext, url);
+            } else {
                 WebViewActivity.forward(mContext, url);
             }
         }

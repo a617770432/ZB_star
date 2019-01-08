@@ -58,6 +58,8 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
         mSparseIntArray.put(Constants.CASH_ACCOUNT_ALI, R.string.cash_type_ali);
         mSparseIntArray.put(Constants.CASH_ACCOUNT_WX, R.string.cash_type_wx);
         mSparseIntArray.put(Constants.CASH_ACCOUNT_BANK, R.string.cash_type_bank);
+        mSparseIntArray.put(Constants.CASH_ACCOUNT_USDT, R.string.cash_type_usdt);
+
         mKey = Constants.CASH_ACCOUNT_ALI;
         mInflater = LayoutInflater.from(mContext);
         findViewById(R.id.root).setOnClickListener(this);
@@ -138,7 +140,7 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
                 ToastUtil.show(R.string.cash_input_wx_account);
                 return;
             }
-        } else {
+        } else if (mKey == Constants.CASH_ACCOUNT_BANK) {
             account = mEditBankAccount.getText().toString().trim();
             if (TextUtils.isEmpty(account)) {
                 ToastUtil.show(R.string.cash_input_bank_account);
@@ -152,6 +154,12 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
             bank = mEditBankName.getText().toString().trim();
             if (TextUtils.isEmpty(account)) {
                 ToastUtil.show(R.string.cash_input_bank_name);
+                return;
+            }
+        } else {
+            account = mEditWxAccount.getText().toString().trim();
+            if (TextUtils.isEmpty(account)) {
+                ToastUtil.show(R.string.cash_input_usdt_account);
                 return;
             }
         }
@@ -168,22 +176,38 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
         popupWindow.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.bg_pop_cash));
         TextView btn1 = v.findViewById(R.id.btn_1);
         TextView btn2 = v.findViewById(R.id.btn_2);
+        TextView btn3 = v.findViewById(R.id.btn_3);
         if (mKey == Constants.CASH_ACCOUNT_ALI) {
             btn1.setTag(mSparseIntArray.keyAt(1));
             btn1.setText(mSparseIntArray.valueAt(1));
             btn2.setTag(mSparseIntArray.keyAt(2));
             btn2.setText(mSparseIntArray.valueAt(2));
+            btn3.setTag(mSparseIntArray.keyAt(3));
+            btn3.setText(mSparseIntArray.valueAt(3));
         } else if (mKey == Constants.CASH_ACCOUNT_WX) {
             btn1.setTag(mSparseIntArray.keyAt(0));
             btn1.setText(mSparseIntArray.valueAt(0));
             btn2.setTag(mSparseIntArray.keyAt(2));
             btn2.setText(mSparseIntArray.valueAt(2));
+            btn3.setTag(mSparseIntArray.keyAt(3));
+            btn3.setText(mSparseIntArray.valueAt(3));
+        } else if ((mKey == Constants.CASH_ACCOUNT_BANK)) {
+            btn1.setTag(mSparseIntArray.keyAt(0));
+            btn1.setText(mSparseIntArray.valueAt(0));
+            btn2.setTag(mSparseIntArray.keyAt(1));
+            btn2.setText(mSparseIntArray.valueAt(1));
+            btn3.setTag(mSparseIntArray.keyAt(3));
+            btn3.setText(mSparseIntArray.valueAt(3));
         } else {
             btn1.setTag(mSparseIntArray.keyAt(0));
             btn1.setText(mSparseIntArray.valueAt(0));
             btn2.setTag(mSparseIntArray.keyAt(1));
             btn2.setText(mSparseIntArray.valueAt(1));
+            btn3.setTag(mSparseIntArray.keyAt(2));
+            btn3.setText(mSparseIntArray.valueAt(2));
         }
+
+
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,6 +239,7 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
                             if (mGroup3.getVisibility() == View.VISIBLE) {
                                 mGroup3.setVisibility(View.GONE);
                             }
+                            mEditWxAccount.setHint("请输入微信账号");
                             break;
                         case Constants.CASH_ACCOUNT_BANK:
                             if (mGroup1.getVisibility() == View.VISIBLE) {
@@ -227,12 +252,25 @@ public class CashAccountViewHolder extends AbsViewHolder implements View.OnClick
                                 mGroup3.setVisibility(View.VISIBLE);
                             }
                             break;
+                        case Constants.CASH_ACCOUNT_USDT:
+                            if (mGroup1.getVisibility() == View.VISIBLE) {
+                                mGroup1.setVisibility(View.GONE);
+                            }
+                            if (mGroup2.getVisibility() != View.VISIBLE) {
+                                mGroup2.setVisibility(View.VISIBLE);
+                            }
+                            if (mGroup3.getVisibility() == View.VISIBLE) {
+                                mGroup3.setVisibility(View.GONE);
+                            }
+                            mEditWxAccount.setHint("请输入USDT地址");
+                            break;
                     }
                 }
             }
         };
         btn1.setOnClickListener(onClickListener);
         btn2.setOnClickListener(onClickListener);
+        btn3.setOnClickListener(onClickListener);
         popupWindow.showAsDropDown(mBtnChooseType);
     }
 

@@ -112,6 +112,9 @@ dependencies {
     compile 'com.android.support:support-v4:27.1.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    compile files('libs/xUtils-2.6.14.jar')
+    compile files('libs/org.apache.http.legacy.jar')
+
     //recyclerView BRVAH
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //tablayout

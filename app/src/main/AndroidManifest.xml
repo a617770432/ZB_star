@@ -175,6 +175,18 @@
             android:name=".activity.AppealContentActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.CertificationFailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CertificationSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CertificationConfirmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
