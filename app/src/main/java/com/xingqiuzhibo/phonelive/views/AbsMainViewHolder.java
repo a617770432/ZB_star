@@ -21,6 +21,10 @@ public abstract class AbsMainViewHolder extends AbsViewHolder {
         super(context, parentView);
     }
 
+    public AbsMainViewHolder(Context context, ViewGroup parentView,Object... args) {
+        super(context, parentView,args);
+    }
+
     public void setAppBarLayoutListener(MainAppBarLayoutListener appBarLayoutListener) {
     }
 

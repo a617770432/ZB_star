@@ -1,21 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
     >
 
-    <com.xingqiuzhibo.phonelive.custom.MyViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
+        android:layout_height="74dp"
+        android:paddingTop="25dp"
+        android:background="@color/white"
+        >
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/sliding_tab"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            app:tl_indicator_color="@color/global"
+            app:tl_indicator_width="20dp"
+            app:tl_indicator_height="2dp"
+            app:tl_indicator_corner_radius="1dp"
+            app:tl_indicator_gravity="BOTTOM"
+            app:tl_indicator_style="NORMAL"
+            app:tl_textsize="19sp"
+            app:tl_textSelectColor="@color/black"
+            app:tl_textUnselectColor="#999999"
+            app:tl_tab_space_equal="true"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_search"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/icon_main_search"
+            android:padding="9dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/iv_add"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/icon_add"
+            android:padding="9dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_message"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/icon_message"
+            android:padding="9dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray2"
+        android:layout_marginTop="2dp"
         />
 
-    <FrameLayout
-        android:id="@+id/top_container"
+    <com.xingqiuzhibo.phonelive.custom.CustomViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        />
+        android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -297,7 +297,15 @@
         <!-- 友盟统计 end -->
         <activity android:name=".activity.MyCertificationActivity" />
         <activity android:name=".activity.CertificationStepTwoActivity" />
-        <activity android:name=".activity.OrderDetailActivity"></activity>
+        <activity android:name=".activity.OrderDetailActivity" />
+        <activity android:name=".activity.SeeActivity" />
+        <activity android:name=".activity.PublishTieZiActivity" />
+        <activity android:name=".activity.PictureFolderActivity" />
+        <activity android:name=".activity.PictureActivity" />
+        <activity
+            android:name=".activity.TieZiDetailActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.CircleDetailActivity"></activity>
     </application>
 
 </manifest>

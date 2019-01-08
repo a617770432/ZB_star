@@ -7,6 +7,11 @@
     <string name="bonus_sign_1">已连续签到</string>
     <string name="bonus_day">天</string>
 
+    <string name="text_select_photo">请选择照片来源</string>
+    <string name="text_take_photo">拍照</string>
+    <string name="text_select_album">从相册选择</string>
+    <string name="text_cancel">取消</string>
+
     <string name="cash">提现账户</string>
     <string name="cash_account_empty">您当前还没设置提现账户</string>
     <string name="cash_add_account">添加提现账户</string>

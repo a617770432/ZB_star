@@ -24,4 +24,9 @@
     <color name="bg_coin_img">#b5b5b5</color>
     <color name="coin_line2">#f2f2f2</color>
     <color name="black">#000</color>
+
+    <color name="title_color">#333333</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_bg_gray">#e5e5e5</color>
+    <color name="bg_pressed_color">#F4F9FF</color>
 </resources>

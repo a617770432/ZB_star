@@ -175,5 +175,23 @@ public class Constants {
 
     public static final String SEARCH_ENTER_HOME = "isVisBtnEnter";
 
+    /**
+     * 缓存文件保存路径
+     */
+    public static final String CACHE_FILE_PATH = "/xinqiuzhibo/cache/";
 
+    /**
+     * 照片保存路径
+     */
+    public static final String PICTURE_PATH = "/xinqiuzhibo/pic/";
+
+    public final static String ALL_PHOTO = "所有图片";
+
+    public static final int REQUEST_CODE_FOR_SELECT_PHOTO = 5;
+    public static final int REQUEST_CODE_FOR_TAKE_PHOTO_SHOW = 15;
+    public static final int REQUEST_CODE_FOR_SELECT_PHOTO_SHOW = 16;
+    public static final int REQUEST_CODE_FOR_SELECT_PHOTO_SHOW_THEBACKGROUND = 10;
+    public static final int REQUEST_CODE_FOR_DELETE_PHOTO_SHOW = 25;
+
+    public static final int COUNT_MAX_SHOW_PICTURE = 10;
 }

@@ -4,14 +4,19 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.ielse.imagewatcher.ImageWatcherHelper;
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
@@ -19,6 +24,7 @@ import com.xingqiuzhibo.phonelive.adapter.ViewPagerAdapter;
 import com.xingqiuzhibo.phonelive.bean.BonusBean;
 import com.xingqiuzhibo.phonelive.bean.ConfigBean;
 import com.xingqiuzhibo.phonelive.bean.LiveBean;
+import com.xingqiuzhibo.phonelive.custom.MessagePicturesLayout;
 import com.xingqiuzhibo.phonelive.custom.TabButtonGroup;
 import com.xingqiuzhibo.phonelive.http.HttpCallback;
 import com.xingqiuzhibo.phonelive.http.HttpConsts;
@@ -32,6 +38,7 @@ import com.xingqiuzhibo.phonelive.interfaces.MainStartChooseCallback;
 import com.xingqiuzhibo.phonelive.presenter.CheckLivePresenter;
 import com.xingqiuzhibo.phonelive.utils.DialogUitl;
 import com.xingqiuzhibo.phonelive.utils.DpUtil;
+import com.xingqiuzhibo.phonelive.utils.GlideSimpleLoader;
 import com.xingqiuzhibo.phonelive.utils.L;
 import com.xingqiuzhibo.phonelive.utils.LocationUtil;
 import com.xingqiuzhibo.phonelive.utils.ProcessResultUtil;
@@ -54,7 +61,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 
-public class MainActivity extends AbsActivity {
+public class MainActivity extends AbsActivity implements MessagePicturesLayout.Callback{
 
     private ViewGroup mRootView;
     private TabButtonGroup mTabButtonGroup;
@@ -77,6 +84,10 @@ public class MainActivity extends AbsActivity {
     @Override
     protected void main() {
 
+        //  **************  动态 addView   **************
+        iwHelper = ImageWatcherHelper.with(this, new GlideSimpleLoader()) // 一般来讲， ImageWatcher 需要占据全屏的位置
+                .setErrorImageRes(R.mipmap.error_picture);// 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
+
         // 获取屏幕的宽高，设置为全局变量
         DisplayMetrics outMetrics = new DisplayMetrics();
 
@@ -91,7 +102,7 @@ public class MainActivity extends AbsActivity {
         mViewPager.setOffscreenPageLimit(4);
         mViewHolders = new AbsMainViewHolder[4];
         mViewHolders[0] = new MainHomeViewHolder(mContext, mViewPager);
-        mViewHolders[1] = new MainNearViewHolder(mContext, mViewPager);
+        mViewHolders[1] = new MainNearViewHolder(mContext, mViewPager , getSupportFragmentManager());
         mViewHolders[2] = new MainListViewHolder(mContext, mViewPager);
         mViewHolders[3] = new MainMeViewHolder(mContext, mViewPager);
         List<View> list = new ArrayList<>();
@@ -393,12 +404,27 @@ public class MainActivity extends AbsActivity {
 
     @Override
     public void onBackPressed() {
-        long curTime = System.currentTimeMillis();
-        if (curTime - mLastClickBackTime > 2000) {
-            mLastClickBackTime = curTime;
-            ToastUtil.show(R.string.main_click_next_exit);
-            return;
+
+        if (!iwHelper.handleBackPressed()) {
+            long curTime = System.currentTimeMillis();
+            if (curTime - mLastClickBackTime > 2000) {
+                mLastClickBackTime = curTime;
+                ToastUtil.show(R.string.main_click_next_exit);
+                return;
+            }
+            super.onBackPressed();
         }
-        super.onBackPressed();
+
+    }
+
+    //图片点击放大
+    private ImageWatcherHelper iwHelper;
+
+    @Override
+    public void onThumbPictureClick(ImageView i, SparseArray<ImageView> imageGroupList, List<Uri> urlList , int layoutPosition) {
+        //图片点击放大点击事件
+        iwHelper.show(i, imageGroupList, urlList);
+        EventBus.getDefault().post(layoutPosition);
+
     }
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="1dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        >
+        
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/iv_head"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/tv_focus"
+            android:layout_marginEnd="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女神聚集地"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女神带您海外购"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:layout_marginTop="8dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="+ 关注"
+            android:textColor="#333333"
+            android:textSize="12sp"
+            android:background="@drawable/round_stroke_black_5"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:layout_marginTop="20dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
