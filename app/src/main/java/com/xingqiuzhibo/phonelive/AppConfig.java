@@ -8,10 +8,9 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.SparseArray;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.xingqiuzhibo.phonelive.activity.LoginActivity;
+import com.xingqiuzhibo.phonelive.activity.LoginByAccountActivity;
 import com.xingqiuzhibo.phonelive.bean.ConfigBean;
 import com.xingqiuzhibo.phonelive.bean.LevelBean;
 import com.xingqiuzhibo.phonelive.bean.LiveGiftBean;
@@ -23,7 +22,6 @@ import com.xingqiuzhibo.phonelive.im.ImPushUtil;
 import com.xingqiuzhibo.phonelive.interfaces.CommonCallback;
 import com.xingqiuzhibo.phonelive.utils.L;
 import com.xingqiuzhibo.phonelive.utils.SpUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -464,7 +462,7 @@ public class AppConfig {
 
     public boolean checkToken(Context context) {
         if (null == getToken()) {
-            Intent intent = new Intent(context, LoginActivity.class);
+            Intent intent = new Intent(context, LoginByAccountActivity.class);
             context.startActivity(intent);
             return false;
         }

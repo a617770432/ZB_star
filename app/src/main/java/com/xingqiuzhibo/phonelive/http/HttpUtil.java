@@ -202,7 +202,6 @@ public class HttpUtil {
                 .params("user_pass", pwd)
                 .params("pushid", ImPushUtil.getInstance().getPushID())
                 .execute(callback);
-
     }
 
     /**

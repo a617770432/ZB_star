@@ -46,7 +46,7 @@ public class LoginInvalidActivity extends AbsActivity implements View.OnClickLis
         AppConfig.getInstance().clearLoginInfo();
         //友盟统计登出
         MobclickAgent.onProfileSignOff();
-        LoginActivity.forward();
+        LoginByAccountActivity.forward();
         finish();
     }
 

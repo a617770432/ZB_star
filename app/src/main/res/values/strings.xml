@@ -150,12 +150,14 @@
     <string name="login_tip_3">注册登录后体验更精彩!</string>
     <string name="login_tip_4">请输入手机号密码加入我们吧！</string>
     <string name="login_input_phone">请输入手机号码</string>
+    <string name="login_input_account">请输入账号</string>
     <string name="login_input_pwd">请输入密码</string>
     <string name="login_immediately_login">立即登录</string>
     <string name="login_ing">登录中</string>
     <string name="login_immediately_register">立即注册</string>
     <string name="login_forget_pwd">忘记密码</string>
     <string name="login_phone_error">请输入正确的手机号码</string>
+    <string name="login_account_error">请输入合理的账号</string>
     <string name="login_auth_ing">正在授权登录</string>
     <string name="login_auth_success">登录成功</string>
     <string name="login_auth_failure">授权失败</string>

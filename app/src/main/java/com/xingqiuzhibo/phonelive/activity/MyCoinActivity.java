@@ -11,14 +11,11 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.xingqiuzhibo.phonelive.utils.L;
-import com.umeng.commonsdk.debug.W;
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.adapter.CoinAdapter;
 import com.xingqiuzhibo.phonelive.bean.CoinBean;
-import com.xingqiuzhibo.phonelive.bean.ConfigBean;
 import com.xingqiuzhibo.phonelive.bean.UserBean;
 import com.xingqiuzhibo.phonelive.custom.RefreshLayout;
 import com.xingqiuzhibo.phonelive.event.CoinChangeEvent;
@@ -30,9 +27,7 @@ import com.xingqiuzhibo.phonelive.pay.PayCallback;
 import com.xingqiuzhibo.phonelive.pay.ali.AliPayBuilder;
 import com.xingqiuzhibo.phonelive.pay.wx.WxPayBuilder;
 import com.xingqiuzhibo.phonelive.utils.DialogUitl;
-import com.xingqiuzhibo.phonelive.utils.DpUtil;
 import com.xingqiuzhibo.phonelive.utils.ToastUtil;
-import com.xingqiuzhibo.phonelive.utils.WordUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -74,8 +69,8 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
 
     @Override
     protected void main() {
+        acts.add(this);
         mCoinName = AppConfig.getInstance().getCoinName();
-        setTitle(WordUtil.getString(R.string.main_me) + mCoinName);
         mTop = findViewById(R.id.top);
         mBalance = (TextView) findViewById(R.id.balance);
         mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
@@ -85,12 +80,14 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
         mRefreshLayout.setScorllView(mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setLoadMoreEnable(false);
-        mAdapter = new CoinAdapter(mContext,  mCoinName);
+        mAdapter = new CoinAdapter(mContext, mCoinName);
         //mAdapter.setContactView(mTop);
         mAdapter.setOnItemClickListener(this);
         findViewById(R.id.btn_coin).setOnClickListener(this);
         findViewById(R.id.btn_cur_order).setOnClickListener(this);
         findViewById(R.id.btn_appeal_order).setOnClickListener(this);
+        findViewById(R.id.tv_to_cash).setOnClickListener(this);
+        findViewById(R.id.sub_title).setOnClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -103,7 +100,7 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
         } else {
             checkPayResult();
         }
-        if (mStatus!=0){
+        if (mStatus != 0) {
             loadOrderData();
         }
     }
@@ -135,7 +132,7 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
     }
 
     private void loadOrderData() {
-        HttpUtil.getOrder(1,mStatus, new HttpCallback() {
+        HttpUtil.getOrder(1, mStatus, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 if (code == 0) {
@@ -144,14 +141,15 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
                     if (mAdapter != null) {
                         mAdapter.setList(list, CoinAdapter.ORDER);
                     }
-                }else {
+                } else {
                     ToastUtil.show(msg);
                 }
             }
         });
     }
+
     private void loadMoreOrderData() {
-        HttpUtil.getOrder(mStatus==1?mCurOrderP:mAppealOrderP,mStatus, new HttpCallback() {
+        HttpUtil.getOrder(mStatus == 1 ? mCurOrderP : mAppealOrderP, mStatus, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 mRefreshLayout.completeLoadMore();
@@ -161,10 +159,10 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
                     if (mAdapter != null) {
                         mAdapter.insertList(list);
                     }
-                }else {
-                    if (mStatus==1){
+                } else {
+                    if (mStatus == 1) {
                         mCurOrderP--;
-                    }else if (mStatus==2){
+                    } else if (mStatus == 2) {
                         mAppealOrderP--;
                     }
                     ToastUtil.show(msg);
@@ -255,20 +253,19 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
         builder.pay();
     }
 
-    private void offPay(){
+    private void offPay() {
         HttpUtil.getOffLineOrder(mCheckedCoinBean.getMoney(), mCheckedCoinBean.getId(), mCheckedCoinBean.getCoin(), new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 if (code == 0 && info.length > 0) {
                     JSONObject obj = JSON.parseObject(info[0]);
                     String orderInfo = obj.getString("orderid");
-
                     //改
-                    Intent intent = new Intent(MyCoinActivity.this , OrderDetailActivity.class);
-                    intent.putExtra("order_id",orderInfo);
+                    Intent intent = new Intent(MyCoinActivity.this, OrderDetailActivity.class);
+                    intent.putExtra("order_id", orderInfo);
                     startActivity(intent);
 //                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+AppConfig.getInstance().getUid()+"&token="+AppConfig.getInstance().getToken()+"&orderno="+orderInfo);
-                }else {
+                } else {
                     ToastUtil.show(msg);
                 }
             }
@@ -330,19 +327,27 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_coin:
-                mStatus=0;
+                mStatus = 0;
                 mRefreshLayout.setLoadMoreEnable(false);
                 loadData();
                 break;
             case R.id.btn_cur_order:
-                mStatus=1;
+                mStatus = 1;
                 mRefreshLayout.setLoadMoreEnable(true);
                 loadOrderData();
                 break;
             case R.id.btn_appeal_order:
-                mStatus=2;
+                mStatus = 2;
                 mRefreshLayout.setLoadMoreEnable(true);
                 loadOrderData();
+                break;
+            case R.id.tv_to_cash:
+                //立即提现
+                startActivity(new Intent(mContext, MyProfitActivity.class));
+                break;
+            case R.id.sub_title:
+                //钻石明细
+                startActivity(new Intent(mContext, CoinHisActivity.class));
                 break;
         }
 
@@ -355,14 +360,13 @@ public class MyCoinActivity extends AbsActivity implements OnItemClickListener<C
 
     @Override
     public void onLoadMore() {
-        if (mStatus==1){
+        if (mStatus == 1) {
             mCurOrderP++;
-        }else if (mStatus==2){
+        } else if (mStatus == 2) {
             mAppealOrderP++;
         }
         loadMoreOrderData();
     }
-
 
 
 }

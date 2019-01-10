@@ -8,10 +8,12 @@
     <RelativeLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#FFFFFF">
+        android:layout_height="67dp"
+        android:background="#FFFFFF"
+        android:paddingTop="19dp">
 
         <ImageView
+            android:id="@+id/img_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="15dp"
@@ -19,13 +21,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:text="申诉内容"
             android:textColor="#333333"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_appeal_history"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
@@ -51,8 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="20dp">
+            android:paddingBottom="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,12 +79,14 @@
                     android:layout_marginRight="5dp">
 
                     <ImageView
+                        android:id="@+id/img_1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@mipmap/ic_launcher"
                         android:visibility="gone" />
 
                     <TextView
+                        android:id="@+id/tv_1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/background_white_coner"
@@ -96,12 +105,14 @@
                     android:layout_marginHorizontal="5dp">
 
                     <ImageView
+                        android:id="@+id/img_2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@mipmap/ic_launcher"
                         android:visibility="gone" />
 
                     <TextView
+                        android:id="@+id/tv_2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/background_white_coner"
@@ -120,12 +131,14 @@
                     android:layout_marginLeft="5dp">
 
                     <ImageView
+                        android:id="@+id/img_3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@mipmap/ic_launcher"
                         android:visibility="gone" />
 
                     <TextView
+                        android:id="@+id/tv_3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/background_white_coner"
@@ -147,16 +160,17 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/et_input"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/background_white_coner"
                 android:gravity="start"
                 android:hint="请输入文字信息"
-                android:maxLength="300"
+                android:maxLength="200"
                 android:padding="10dp"
                 android:textColor="#333333"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,6 +190,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_update"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="40dp"

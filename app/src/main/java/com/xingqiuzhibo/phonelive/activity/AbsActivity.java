@@ -1,5 +1,6 @@
 package com.xingqiuzhibo.phonelive.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected Context mContext;
     protected List<LifeCycleListener> mLifeCycleListeners;
     public static int SCREEN_WIDTH;
+    public static List<Activity> acts = new ArrayList<>();
 
 
     @Override

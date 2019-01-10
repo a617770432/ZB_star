@@ -1,37 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <include layout="@layout/view_title"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/white"
+        android:paddingTop="19dp">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="我的钻石"
+            android:textColor="@color/textColor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:onClick="backClick"
+            android:padding="9dp"
+            android:src="@mipmap/icon_back"
+            android:tint="@color/textColor" />
+
+        <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="钻石明细"
+            android:textColor="@color/textColor"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:background="@drawable/bg_coin_head"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
                 android:text="@string/coin_balance"
-                android:textColor="@color/textColor2"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#333333"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/balance"
@@ -39,19 +74,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
+                android:text="167858"
                 android:textColor="@color/global"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                />
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_to_cash"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_gray_line_15dp"
+                android:gravity="center"
+                android:text="立即提现"
+                android:textColor="#333333"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <RadioGroup
-            android:background="@color/white"
             android:id="@+id/rg_tit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_below="@id/top"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <RadioButton
@@ -63,7 +109,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:text="@string/charge"/>
+                android:text="@string/charge" />
 
             <RadioButton
                 android:id="@+id/btn_cur_order"
@@ -73,7 +119,7 @@
                 android:background="@drawable/coin_line"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/cur_order"/>
+                android:text="@string/cur_order" />
 
             <RadioButton
                 android:id="@+id/btn_appeal_order"
@@ -83,7 +129,7 @@
                 android:background="@drawable/coin_line"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/appeal_order"/>
+                android:text="@string/appeal_order" />
         </RadioGroup>
 
         <View
@@ -91,25 +137,23 @@
             android:layout_height="1dp"
             android:layout_below="@id/top"
             android:layout_marginTop="47dp"
-            android:background="@color/gray2"/>
+            android:background="@color/gray2" />
 
 
         <com.xingqiuzhibo.phonelive.custom.RefreshLayout
-            android:layout_below="@id/rg_tit"
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rg_tit"
             app:loadMoreEnable="true"
-            app:refreshEnable="false"
-            android:layout_height="match_parent">
+            app:refreshEnable="false">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"
-                />
+                android:overScrollMode="never" />
         </com.xingqiuzhibo.phonelive.custom.RefreshLayout>
-
 
 
     </RelativeLayout>

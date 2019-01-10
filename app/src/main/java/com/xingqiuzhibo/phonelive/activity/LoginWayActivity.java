@@ -41,12 +41,12 @@ public class LoginWayActivity extends AppCompatActivity {
         setStatusBar();
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_login_way);
-
+        AbsActivity.acts.add(LoginWayActivity.this);
         LinearLayout loginWay = findViewById(R.id.login_way);
         loginWay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //注册账号登录
+                //手机注册账号登录
                 Intent intent = new Intent(LoginWayActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -64,6 +64,15 @@ public class LoginWayActivity extends AppCompatActivity {
                         onLoginSuccess(code, msg, info);
                     }
                 });
+            }
+        });
+
+        findViewById(R.id.login_by_account).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //账号注册账号登录
+                Intent intent = new Intent(LoginWayActivity.this, LoginByAccountActivity.class);
+                startActivity(intent);
             }
         });
     }

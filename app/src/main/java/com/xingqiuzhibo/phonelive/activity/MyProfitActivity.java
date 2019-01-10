@@ -54,7 +54,7 @@ public class MyProfitActivity extends AbsActivity implements View.OnClickListene
 
         List<String> tabList = new ArrayList<>();
         tabList.add("钻石");
-        tabList.add("映票");
+//        tabList.add("映票");
         WithDrawCashTabAdapter adapter = new WithDrawCashTabAdapter(getSupportFragmentManager(), tabList);
         viewPager.setAdapter(adapter);
         slidingTab.setViewPager(viewPager);
@@ -92,8 +92,9 @@ public class MyProfitActivity extends AbsActivity implements View.OnClickListene
      * 提现记录
      */
     private void cashRecord() {
-        String url = HtmlConfig.CASH_RECORD;
-        WebViewActivity.forward(mContext, url);
+//        String url = HtmlConfig.CASH_RECORD;
+//        WebViewActivity.forward(mContext, url);
+        startActivity(new Intent(this, ChangeCashActivity.class));
     }
 
     @Override

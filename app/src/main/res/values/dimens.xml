@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="qrcode_size">230dp</dimen>
+    <dimen name="qrcode_size_margin">30dp</dimen>
+    <dimen name="qrcode_size_logo_radius">8dp</dimen>
+
+    <dimen name="default_status_bar_height">25dp</dimen>
+    <dimen name="default_action_bar_height">54dp</dimen>
+    <dimen name="default_bottom_bar_height">60dp</dimen>
 
     <dimen name="title_mine_text_sp">14sp</dimen>
 

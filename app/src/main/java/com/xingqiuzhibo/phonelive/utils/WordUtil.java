@@ -1,5 +1,7 @@
 package com.xingqiuzhibo.phonelive.utils;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.res.Resources;
 
 import com.xingqiuzhibo.phonelive.AppContext;
@@ -19,5 +21,11 @@ public class WordUtil {
 
     public static String getString(int res) {
         return sResources.getString(res);
+    }
+
+    public static void CopyToClipboard(Context context, String text) {
+        ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        //clip.getText(); // 粘贴
+        clip.setText(text); // 复制
     }
 }

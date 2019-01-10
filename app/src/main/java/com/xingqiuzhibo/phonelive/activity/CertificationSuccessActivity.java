@@ -1,8 +1,6 @@
 package com.xingqiuzhibo.phonelive.activity;
 
-import android.util.Log;
 import android.widget.TextView;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
@@ -12,7 +10,6 @@ import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.http.NetWork;
 import com.xingqiuzhibo.phonelive.utils.UrlUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,13 +43,12 @@ public class CertificationSuccessActivity extends AbsActivity {
             JSONObject jsb = JSON.parseObject(responseInfo.result);
             Integer code = jsb.getInteger("code");
             if (code == 0) {
-                Log.e("TAG", responseInfo.result);
                 JSONObject dataJson = jsb.getJSONObject("info");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-                String time = sdf.format(dataJson.getLong("uptime"));
-                tvInfo.setText("姓名\t" + dataJson.getString("realName") + "\n手机\t" + dataJson.getString("mobile")
-                        + "\n日期\t" + time);
-                tvID.setText("证件号码\t" + dataJson.getString("cerNo"));
+                String time = sdf.format(dataJson.getLong("uptime")*1000);
+                tvInfo.setText("姓名\t\t" + dataJson.getString("realName") + "\n手机\t\t" + dataJson.getString("mobile")
+                        + "\n日期\t\t" + time);
+                tvID.setText("证件号码\t\t" + dataJson.getString("cerNo"));
             }
 
 

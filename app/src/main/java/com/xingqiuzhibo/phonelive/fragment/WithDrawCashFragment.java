@@ -27,6 +27,7 @@ import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.HtmlConfig;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.activity.CashActivity;
+import com.xingqiuzhibo.phonelive.activity.ChangeCashActivity;
 import com.xingqiuzhibo.phonelive.activity.WebViewActivity;
 import com.xingqiuzhibo.phonelive.bean.ProfitBean;
 import com.xingqiuzhibo.phonelive.http.HttpCallback;
@@ -130,8 +131,8 @@ public class WithDrawCashFragment extends Fragment implements View.OnClickListen
                         if (mPosition == 0) {
                             float a = (i * proportion) / 100;
                             if (a > 0.1) {
-                                int b = (int) a * 100;
-                                mCash = b / 100;
+                                int b = (int) (a * 100);
+                                mCash = (float) b / 100;
                                 mMoney.setText("¥" + mCash);
                             }
                         } else {
@@ -294,8 +295,9 @@ public class WithDrawCashFragment extends Fragment implements View.OnClickListen
             Integer code = jsb.getInteger("code");
             if (code == 0) {
                 ToastUtil.show("信息提交成功！");
-                String url = HtmlConfig.CASH_RECORD;
-                WebViewActivity.forward(getContext(), url);
+                startActivity(new Intent(getContext(), ChangeCashActivity.class));
+//                String url = HtmlConfig.CASH_RECORD;
+//                WebViewActivity.forward(getContext(), url);
                 getActivity().finish();
             } else {
                 ToastUtil.show(jsb.getString("msg"));

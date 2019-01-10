@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
@@ -25,7 +23,9 @@ import com.xingqiuzhibo.phonelive.activity.LiveRecordActivity;
 import com.xingqiuzhibo.phonelive.activity.MainActivity;
 import com.xingqiuzhibo.phonelive.activity.MyCertificationActivity;
 import com.xingqiuzhibo.phonelive.activity.MyCoinActivity;
+import com.xingqiuzhibo.phonelive.activity.MyDetailAllActivity;
 import com.xingqiuzhibo.phonelive.activity.MyProfitActivity;
+import com.xingqiuzhibo.phonelive.activity.MyShareActivity;
 import com.xingqiuzhibo.phonelive.activity.SettingActivity;
 import com.xingqiuzhibo.phonelive.activity.WebViewActivity;
 import com.xingqiuzhibo.phonelive.adapter.MainMeAdapter;
@@ -190,7 +190,6 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
         if (bean.getId() == 11) {
             //我的认证
             String url = bean.getHref();
-            Log.e("TAG", AppConfig.getInstance().getUserBean().getAuth_status());
             if (AppConfig.getInstance().getUserBean().getAuth_status() == null || TextUtils.isEmpty(AppConfig.getInstance().getUserBean().getAuth_status())) {
                 //未认证
                 Intent intent = new Intent(mContext, MyCertificationActivity.class);
@@ -235,7 +234,13 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
         } else {
             if (bean.getId() == 8) {
                 //我的分销
-                FenxiaoWebViewActivity.forward(mContext, url);
+                Intent intent = new Intent(mContext, MyShareActivity.class);
+                mContext.startActivity(intent);
+//                FenxiaoWebViewActivity.forward(mContext, url);
+            } else if (bean.getId() == 14) {
+                //我的明细
+                Intent intent = new Intent(mContext, MyDetailAllActivity.class);
+                mContext.startActivity(intent);
             } else {
                 WebViewActivity.forward(mContext, url);
             }

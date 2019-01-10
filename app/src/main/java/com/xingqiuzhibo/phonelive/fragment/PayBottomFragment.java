@@ -50,6 +50,7 @@ public class PayBottomFragment extends BottomSheetDialogFragment implements View
             typeBank = getArguments().getString("type_bank");
             mTime = getArguments().getString("order_time");
             mCoin = getArguments().getString("order_coin");
+            mAccount = typeBank;
         }
 
     }

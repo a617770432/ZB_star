@@ -8,6 +8,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.xingqiuzhibo.phonelive.AppConfig;
+import com.xingqiuzhibo.phonelive.im.ImPushUtil;
 
 import org.apache.http.entity.StringEntity;
 
@@ -120,9 +121,12 @@ public class NetWork {
      */
     public static void httpParamGet(String url, Map<String, Object> map, Context context, RequestCallBack<String> request) {
         RequestParams params = new RequestParams();
-        if (!AppConfig.getInstance().checkToken(context)) {
-            return;
+        if (context != null) {
+            if (!AppConfig.getInstance().checkToken(context)) {
+                return;
+            }
         }
+
         if (null != map) {
             if (map.size() != 0) {
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -151,9 +155,10 @@ public class NetWork {
      */
     public static void httpPost(String url, String jsonStr, Context context, RequestCallBack<String> request) {
         RequestParams params = new RequestParams();
-        if (!AppConfig.getInstance().checkToken(context)) {
-            return;
-        }
+        if (null != context)
+            if (!AppConfig.getInstance().checkToken(context)) {
+                return;
+            }
         // jsonStr = "{\"mobile\": \"13800138000\",\"password\": \"1\"}";
         // 只包含字符串参数时默认使用BodyParamsEntity，
         // 类似于UrlEncodedFormEntity（"application/x-www-form-urlencoded"）。
@@ -192,6 +197,7 @@ public class NetWork {
             if (map.size() != 0) {
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
                     params.addQueryStringParameter(entry.getKey(), (String) entry.getValue());
+                    Log.d("TAG", entry.getKey() + ":" + (String) entry.getValue());
                 }
             }
             params.setContentType("application/json");

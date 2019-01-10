@@ -3,10 +3,10 @@ package com.xingqiuzhibo.phonelive.activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +60,7 @@ public class OrderDetailActivity extends AbsActivity implements OrderPayAdapter.
 
     @Override
     protected void main() {
-
+        acts.add(this);
         setTitle("订单详情");
 
         orderNum = findViewById(R.id.tv_order_num);
@@ -79,34 +79,41 @@ public class OrderDetailActivity extends AbsActivity implements OrderPayAdapter.
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                //1表示支付宝，2表示微信，3表示银行卡'
-                String numAlipay = null, numWechat = null, numBank = null;
-                for (int i = 0; i < list.size(); i++) {
-                    switch (list.get(i).getType()) {
-                        case 1:
-                            numAlipay = list.get(i).getAccount();
-                            break;
-                        case 2:
-                            numWechat = list.get(i).getAccount();
-                            break;
-                        case 3:
-                            numBank = list.get(i).getAccount();
-                            break;
+                if (myOrder.getStatus() == 0) {
+                    Bundle bundle = new Bundle();
+                    //1表示支付宝，2表示微信，3表示银行卡'
+                    String numAlipay = null, numWechat = null, numBank = null;
+                    for (int i = 0; i < list.size(); i++) {
+                        switch (list.get(i).getType()) {
+                            case 1:
+                                numAlipay = list.get(i).getAccount();
+                                break;
+                            case 2:
+                                numWechat = list.get(i).getAccount();
+                                break;
+                            case 3:
+                                numBank = list.get(i).getAccount();
+                                break;
+                        }
                     }
+                    bundle.putString("order_num", myOrder.getOrderno());
+                    bundle.putFloat("pay_money", myOrder.getMoney());
+                    bundle.putString("order_time", myOrder.getAddtime() + "");
+                    if (null != numAlipay)
+                        bundle.putString("type_alipay", numAlipay);
+                    if (null != numWechat)
+                        bundle.putString("type_wechat", numWechat);
+                    if (null != numBank)
+                        bundle.putString("type_bank", numBank);
+                    bundle.putString("order_coin", myOrder.getCoin() + "");
+                    fragment.setArguments(bundle);
+                    fragment.show(getSupportFragmentManager(), "");
+                } else if (myOrder.getStatus() == 1) {
+                    Intent intent = new Intent(OrderDetailActivity.this, AppealContentActivity.class);
+                    intent.putExtra("order_id", myOrder.getId());
+                    startActivity(intent);
                 }
-                bundle.putString("order_num", myOrder.getOrderno());
-                bundle.putFloat("pay_money", myOrder.getMoney());
-                bundle.putString("order_time", myOrder.getAddtime() + "");
-                if (null != numAlipay)
-                    bundle.putString("type_alipay", numAlipay);
-                if (null != numWechat)
-                    bundle.putString("type_wechat", numWechat);
-                if (null != numBank)
-                    bundle.putString("type_bank", numBank);
-                bundle.putString("order_coin", myOrder.getCoin() + "");
-                fragment.setArguments(bundle);
-                fragment.show(getSupportFragmentManager(), "");
+
             }
         });
         //加载数据
@@ -149,7 +156,6 @@ public class OrderDetailActivity extends AbsActivity implements OrderPayAdapter.
     public void onPayTypeClick(int type, String account) {
         //点击支付回调
         //1表示支付宝，2表示微信，3表示银行卡'
-        Log.e("TAG", "已选支付类型：" + type + "___支付账号：" + account);
         Map<String, Object> map = new HashMap<>();
         map.put("orderno", myOrder.getOrderno());
         if (null == account) {
@@ -219,9 +225,15 @@ public class OrderDetailActivity extends AbsActivity implements OrderPayAdapter.
         switch (bean.getStatus()) {
             case 0:
                 orderState.setText("未付款");
+                btn.setText("我已付款");
                 break;
-            default:
+            case 1:
                 orderState.setText("已付款");
+                btn.setText("订单申诉");
+                break;
+            case 2:
+                orderState.setText("已完成");
+                btn.setVisibility(View.GONE);
                 break;
         }
         //订单时间

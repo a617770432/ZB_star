@@ -226,12 +226,15 @@ public class CoinAdapter extends RecyclerView.Adapter {
             tv_free.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mCoinBean.getStatus() == 0) {//未付款取消订单接口
+                    if (mCoinBean.getStatus() == 0) {
+                        //未付款取消订单接口
                         cancelOrder(mCoinBean.getOrderno(), mPos);
-                    } else if (mCoinBean.getStatus() == 2 || mCoinBean.getStatus() == 4) {//订单申诉h5
-//                        Intent intent = new Intent(mContext, AppealContentActivity.class);
-//                        mContext.startActivity(intent);
-                        MoreWebViewActivity.forward(mContext, AppConfig.HOST + "/index.php?g=Appapi&m=Diamonds&a=appeal&uid=" + mUid + "&token=" + mToken + "&orderno=" + mCoinBean.getOrderno());
+                    } else if (mCoinBean.getStatus() == 2 || mCoinBean.getStatus() == 4) {
+                        //订单申诉h5
+                        Intent intent = new Intent(mContext, AppealContentActivity.class);
+                        intent.putExtra("order_id", Integer.valueOf(mCoinBean.getId()));
+                        mContext.startActivity(intent);
+//                        MoreWebViewActivity.forward(mContext, AppConfig.HOST + "/index.php?g=Appapi&m=Diamonds&a=appeal&uid=" + mUid + "&token=" + mToken + "&orderno=" + mCoinBean.getOrderno());
                     }
                 }
             });
@@ -247,9 +250,9 @@ public class CoinAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
 
-                    //改
-                    Intent intent = new Intent(mContext , OrderDetailActivity.class);
-                    intent.putExtra("orderid",mCoinBean.getOrderno());
+                    //订单详情
+                    Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                    intent.putExtra("order_id", mCoinBean.getOrderno());
                     mContext.startActivity(intent);
 //                    WebViewActivity.forward(mContext, AppConfig.HOST+"/index.php?g=Appapi&m=Diamonds&a=index&uid="+mUid+"&token="+mToken+"&orderno="+mCoinBean.getOrderno());
 

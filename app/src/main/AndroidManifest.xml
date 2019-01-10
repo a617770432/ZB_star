@@ -187,6 +187,33 @@
             android:name=".activity.MyShareActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.ShareListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CoinHisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyDetailAllActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginByAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AccountRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PwdProteceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangeCashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindAccountPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AppealHisActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
