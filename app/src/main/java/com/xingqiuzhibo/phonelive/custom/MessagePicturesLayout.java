@@ -42,7 +42,7 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
     private List<Uri> mThumbDataList;
 
     //新增
-    private boolean [] mFuzzy;//是否模糊  true模糊 false清晰
+    private boolean [] mFuzzy;//是否模糊  true模糊 false清晰  暂时无用
     private boolean isFuzzy = false;//是否开启是否模糊 默认为false
     private int mLayoutPosition;//父布局下标
     private ImageCallback imageCallback;//图片点击事件
@@ -154,11 +154,11 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
                 if(isFuzzy){
                     //开启模糊
                     //判断数组内图片下标模糊对应的boolean值
-                    if(mFuzzy[i]){
-                        Glide.with(getContext()).load(thumbList.get(i)).bitmapTransform(new BlurTransformation(getContext(), 30)).into(iPicture);
-                    }else {
-                        Glide.with(getContext()).load(thumbList.get(i)).into(iPicture);
-                    }
+                    Glide.with(getContext()).load(thumbList.get(i)).bitmapTransform(new BlurTransformation(getContext(), 30)).into(iPicture);
+//                    if(mFuzzy[i]){
+//                    }else {
+//                        Glide.with(getContext()).load(thumbList.get(i)).into(iPicture);
+//                    }
                 }else {
                     Glide.with(getContext()).load(thumbList.get(i)).into(iPicture);
                 }

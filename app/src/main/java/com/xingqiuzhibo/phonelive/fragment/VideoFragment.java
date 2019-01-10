@@ -92,7 +92,7 @@ public class VideoFragment extends NewBaseFragment implements NetworkFragment.Cl
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.init();
 
-        if (NetworkStateUtil.isNetWorkConnected(Objects.requireNonNull(getActivity())) || NetworkStateUtil.isMobileConnected(getActivity())) {
+        if (NetworkStateUtil.isNetWorkConnected(Objects.requireNonNull(getActivity())) && NetworkStateUtil.isMobileConnected(getActivity())) {
             NetworkFragment fragment = new NetworkFragment();
             Bundle bundle = new Bundle();
             fragment.setArguments(bundle);

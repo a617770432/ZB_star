@@ -1,11 +1,8 @@
 package com.xingqiuzhibo.phonelive.activity;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.ThumbnailUtils;
@@ -16,38 +13,42 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.Response;
+import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.adapter.ShowPictureAdapter;
+import com.xingqiuzhibo.phonelive.bean.RangeBean;
+import com.xingqiuzhibo.phonelive.bean.TermInfoEntity;
 import com.xingqiuzhibo.phonelive.custom.ScrollGridLayoutManager;
 import com.xingqiuzhibo.phonelive.fragment.SelectPhotoDialogFragment;
-import com.xingqiuzhibo.phonelive.glide.ImgLoader;
-import com.xingqiuzhibo.phonelive.interfaces.ImageResultCallback;
 import com.xingqiuzhibo.phonelive.utils.BitmapUtils;
 import com.xingqiuzhibo.phonelive.utils.DialogUitl;
 import com.xingqiuzhibo.phonelive.utils.FileUtil;
-import com.xingqiuzhibo.phonelive.utils.ProcessImageUtil;
 import com.xingqiuzhibo.phonelive.utils.ToastUtil;
+import com.xingqiuzhibo.phonelive.utils.UrlUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +56,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDialogFragment.ImageCropListener
         , ShowPictureAdapter.OnItemClickListener {
@@ -89,8 +92,14 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
     AppCompatImageView ivTag1;
     @BindView(R.id.iv_tag2)
     AppCompatImageView ivTag2;
+    @BindView(R.id.rl_kind)
+    RelativeLayout rlKind;
 
     public final static int VEDIO_KU = 101;
+    @BindView(R.id.et_title)
+    EditText etTitle;
+    @BindView(R.id.rl_title)
+    RelativeLayout rlTitle;
     private String path = "";//文件路径
 
     private Unbinder unbinder;
@@ -105,14 +114,31 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
     private File tempFile;
 
     //上传视频是的视频封面图片
-    private String videoPic;
+    private String videoPic = "";
     private boolean isVideoClick = false;//是否为视频封面图点击
+    private String videoPath = "";//视频地址
 
     //
     private OptionsPickerView pvOptions;
     List<String> optionsItems1 = new ArrayList<>(); //花费钻石
     List<String> optionsItems2 = new ArrayList<>(); //发布范围
     List<String> optionsItems3 = new ArrayList<>(); //发布栏目
+
+    //一二级栏目的集合
+    private List<RangeBean> rangeBeans = new ArrayList<>();
+
+    private int onePosition;//钻石列表选中的下标
+    private int secondPosition;//发布范围选中的下标
+    private int thirdPosition;//发布栏目选中的下标
+
+    //花费的钻石
+    private String cost = "0";
+
+    //加载dialog
+    private Dialog dialog;
+
+    //上传服务器的实体类
+    private TermInfoEntity entity = new TermInfoEntity();
 
     @Override
     protected int getLayoutId() {
@@ -125,6 +151,8 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
 
         unbinder = ButterKnife.bind(this);
 
+        dialog = DialogUitl.loadingDialog(this);
+
         openType = getIntent().getIntExtra("openType", -1);
 
         switch (openType) {
@@ -133,6 +161,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                 etContent.setVisibility(View.VISIBLE);
                 rlVideoBg.setVisibility(View.GONE);
                 rlPicText.setVisibility(View.GONE);
+                rlTitle.setVisibility(View.VISIBLE);
                 break;
             case 1:
                 setTitle("图文");
@@ -167,13 +196,27 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                 //返回的分别是三个级别的选中位置
                 switch (view.getId()) {
                     case R.id.rl_cost:
-
+                        onePosition = options1;
+                        tvCost.setText(optionsItems1.get(options1) + " 钻石");
+                        cost = optionsItems1.get(options1);
                         break;
                     case R.id.rl_range:
-
+                        secondPosition = options1;
+                        tvRange.setText(optionsItems2.get(options1));
+                        if (rangeBeans.get(secondPosition).getChildren() == null || rangeBeans.get(secondPosition).getChildren().size() == 0) {
+                            rlKind.setVisibility(View.GONE);
+                        } else {
+                            rlKind.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < rangeBeans.get(secondPosition).getChildren().size(); i++) {
+                                optionsItems3.add(rangeBeans.get(secondPosition).getChildren().get(i).getRangeName());
+                                tvKind.setText(optionsItems3.get(0));
+                                thirdPosition = 0;
+                            }
+                        }
                         break;
                     case R.id.rl_kind:
-
+                        thirdPosition = options1;
+                        tvKind.setText(optionsItems3.get(options1));
                         break;
                 }
             }
@@ -186,6 +229,67 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .build();
+
+        getDiamond();
+        getLanMuList();
+    }
+
+    private void getDiamond() {
+        //获取钻石可选列表
+        OkGo.<String>get(UrlUtil.DIAMOND_LIST)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        String res = response.body();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(res);
+                            Log.e("DIAMOND_LIST", jsonObject.toString());
+                            if (jsonObject.optInt("code") == 0) {
+                                JSONArray jsonArray = jsonObject.optJSONArray("list");
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    optionsItems1.add(jsonArray.get(i) + "");
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    private void getLanMuList() {
+        //获取一二级栏目
+        OkGo.<String>get(UrlUtil.RANGE_LIST)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        String res = response.body();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(res);
+                            Log.e("RANGE_LIST", jsonObject.toString());
+                            if (jsonObject.optInt("code") == 0) {
+
+                                rangeBeans.clear();
+
+                                rangeBeans = new Gson().fromJson(jsonObject.optJSONArray("list").toString()
+                                        , new TypeToken<List<RangeBean>>() {
+                                        }.getType());
+
+                                for (int i = 0; i < rangeBeans.size(); i++) {
+                                    optionsItems2.add(rangeBeans.get(i).getRangeName());
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
 
@@ -204,7 +308,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode != RESULT_OK){
+        if (resultCode != RESULT_OK) {
             isVideoClick = false;
             return;
         }
@@ -215,7 +319,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
             case PublishTieZiActivity.VEDIO_KU:
                 Uri uri = data.getData();
                 // 视频路径
-                final String videoPath = FileUtil.getPath(PublishTieZiActivity.this, uri);
+                videoPath = FileUtil.getPath(PublishTieZiActivity.this, uri);
                 // 视频大小
                 long videoSize = 0;
                 try {
@@ -233,6 +337,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                 Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.MICRO_KIND);
                 ivVideo.setImageBitmap(bitmap);
                 ivTag2.setVisibility(View.GONE);
+                uploadFile(2);
                 break;
             // TODO 图片
             case Constants.REQUEST_CODE_FOR_SELECT_PHOTO_SHOW: {
@@ -240,11 +345,12 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                     return;
                 }
 
-                if(isVideoClick){
+                if (isVideoClick) {
                     videoPic = data.getStringArrayListExtra("path").get(0);
                     Glide.with(this).load(videoPic).into(ivVideoPic);
                     ivTag1.setVisibility(View.GONE);
-                }else {
+                    uploadFile(1);
+                } else {
                     paths.addAll(data.getStringArrayListExtra("path"));
                     show(paths);
                 }
@@ -253,10 +359,10 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
             }
             case Constants.REQUEST_CODE_FOR_TAKE_PHOTO_SHOW: {
 
-                if(isVideoClick){
+                if (isVideoClick) {
                     videoPic = BitmapUtils.compressImage(tempFile.toString());
                     Glide.with(this).load(videoPic).into(ivVideoPic);
-                }else {
+                } else {
                     paths.add(BitmapUtils.compressImage(tempFile.toString()));
                     show(paths);
                 }
@@ -290,7 +396,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
         }
     }
 
-    @OnClick({R.id.ll_video_pic, R.id.ll_video, R.id.rl_cost, R.id.rl_range, R.id.rl_kind, R.id.tv_publish , R.id.iv_video_pic})
+    @OnClick({R.id.ll_video_pic, R.id.ll_video, R.id.rl_cost, R.id.rl_range, R.id.rl_kind, R.id.tv_publish, R.id.iv_video_pic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_video_pic:
@@ -327,10 +433,174 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                 break;
             case R.id.tv_publish:
                 //发布
-
+                judge();
                 break;
         }
     }
+
+    private void judge(){
+        if(TextUtils.isEmpty(tvRange.getText().toString())){
+            ToastUtil.show("发布范围不能为空");
+            return;
+        }
+
+        switch (openType) {
+            case 0:
+//                        setTitle("文章");
+                if(TextUtils.isEmpty(etTitle.getText().toString())){
+                    ToastUtil.show("标题不能为空");
+                    return;
+                }
+                if(TextUtils.isEmpty(etContent.getText().toString())){
+                    ToastUtil.show("内容不能为空");
+                    return;
+                }
+                entity.setContent(etContent.getText().toString().trim());
+                break;
+            case 1:
+//                        setTitle("图文");
+                if(TextUtils.isEmpty(etPicContent.getText().toString())){
+                    ToastUtil.show("内容不能为空");
+                    return;
+                }
+                if( listShow.size() - 1 == 0 ){
+                    ToastUtil.show("图片不能为空");
+                    return;
+                }
+                entity.setContent(etPicContent.getText().toString().trim());
+                break;
+            case 2:
+//                        setTitle("视频");
+                if(TextUtils.isEmpty(etVideo.getText().toString())){
+                    ToastUtil.show("内容不能为空");
+                    return;
+                }
+                if(TextUtils.isEmpty(videoPic)){
+                    ToastUtil.show("封面图片不能为空");
+                    return;
+                }
+                if(TextUtils.isEmpty(videoPath)){
+                    ToastUtil.show("视频文件不能为空");
+                    return;
+                }
+                entity.setContent(etVideo.getText().toString().trim());
+                entity.setVideo(videoPath);
+                List<String> img = new ArrayList<String>();
+                img.add(videoPic);
+                entity.setImgList(img);
+                break;
+        }
+        publish();
+    }
+
+    //上传视频
+    private void uploadFile(final int type){
+
+        dialog.show();
+
+        File path;
+        if(type == 1 ){
+            path = new File(videoPic);
+        }else {
+            path = new File(videoPath);
+        }
+
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        builder.addFormDataPart("type", type+"");
+        builder.addFormDataPart("userId", AppConfig.getInstance().getUid());
+        builder.addFormDataPart("file", path.getName(), RequestBody.create(null, path));
+        RequestBody body = builder.build();
+
+        OkGo.<String>post(UrlUtil.UPLOAD_FILE)
+//        OkGo.<String>post("http://192.168.1.158:8585/xqpd/tdapp/base/file/upload")
+                .tag(this)
+                .upRequestBody(body)
+                .params("type", type)
+                .params("userId", AppConfig.getInstance().getUid())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            org.json.JSONObject jsonObject = new org.json.JSONObject(response.body());
+                            if (jsonObject.getInt("code") != 0) {
+
+                                if(type == 1){
+                                    ToastUtil.show("团片上传失败！");
+                                }else {
+                                    ToastUtil.show("视频上传失败！");
+                                }
+                                return;
+                            }
+//                                            org.json.JSONObject data = jsonObject.optJSONObject("data");
+                            String url = jsonObject.optString("url");
+                            Log.e("视频提交返回数据：", url);
+
+                            if(type == 1 ){
+                                videoPic = url;
+                            }else {
+                                videoPath = url;
+                            }
+
+                            dialog.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+    private void publish(){
+        //获取钻石可选列表
+
+        dialog.show();
+
+        entity.setUid(Long.parseLong(AppConfig.getInstance().getUid()));
+        entity.setTitle(etTitle.getText().toString().trim());
+        entity.setAmount(Integer.parseInt(cost));
+        entity.setFiletype(openType);
+        entity.setOneRid(rangeBeans.get(onePosition).getRid().longValue());
+        entity.setOneRangeName(rangeBeans.get(onePosition).getRangeName());
+        if(rangeBeans.get(secondPosition).getChildren() != null && rangeBeans.get(secondPosition).getChildren().size() > 0){
+            entity.setTwoRid(rangeBeans.get(secondPosition).getChildren().get(thirdPosition).getRid().longValue());
+            entity.setTwoRangeName(rangeBeans.get(secondPosition).getChildren().get(thirdPosition).getRangeName());
+        }
+
+        Log.e( "publish_json" , new Gson().toJson(entity));
+
+        OkGo.<String>post(UrlUtil.PUBLISH)
+//        OkGo.<String>post("http://192.168.1.158:8585/xqpd/tdapp/terminfo/save")
+                .tag(this)
+                .upJson(new Gson().toJson(entity))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dialog.dismiss();
+                        String res = response.body();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(res);
+                            Log.e("PUBLISH", jsonObject.toString());
+
+                            if(jsonObject.optInt("code") == 0){
+                                ToastUtil.show("提交成功，请等待审核");
+                                onBackPressed();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dialog.dismiss();
+                    }
+                });
+    }
+
 
     @Override
     public void setImagePath(File path) {
@@ -370,6 +640,5 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
             }
         }).create().show();
     }
-
 
 }

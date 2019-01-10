@@ -3,6 +3,7 @@ package com.xingqiuzhibo.phonelive.views;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,13 +19,17 @@ import android.widget.TextView;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.activity.PublishTieZiActivity;
+import com.xingqiuzhibo.phonelive.activity.SearchTieZiActivity;
 import com.xingqiuzhibo.phonelive.adapter.TabAdapter;
 import com.xingqiuzhibo.phonelive.adapter.TieZiTabAdapter;
 import com.xingqiuzhibo.phonelive.adapter.ViewPagerAdapter;
 import com.xingqiuzhibo.phonelive.custom.CustomViewPager;
 import com.xingqiuzhibo.phonelive.fragment.CircleFragment;
 import com.xingqiuzhibo.phonelive.fragment.CommunityFragment;
+import com.xingqiuzhibo.phonelive.fragment.NoticeFragment;
+import com.xingqiuzhibo.phonelive.fragment.ReportFragment;
 import com.xingqiuzhibo.phonelive.interfaces.MainAppBarExpandListener;
+import com.xingqiuzhibo.phonelive.utils.StartActivityUtil;
 import com.xingqiuzhibo.phonelive.utils.WordUtil;
 
 import java.util.ArrayList;
@@ -77,6 +82,23 @@ public class MainNearViewHolder extends AbsMainViewHolder {
             @Override
             public void onClick(View view) {
                 popupWindow.showAsDropDown(ivSearch, 0, 0, Gravity.END);
+            }
+        });
+
+        findViewById(R.id.iv_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NoticeFragment fragment = new NoticeFragment();
+                Bundle bundle = new Bundle();
+                fragment.setArguments(bundle);
+                fragment.show(fm, "");
+            }
+        });
+
+        findViewById(R.id.iv_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StartActivityUtil.start(mContext , SearchTieZiActivity.class);
             }
         });
 

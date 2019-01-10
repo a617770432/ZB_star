@@ -103,6 +103,18 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="年国内汽车市场将停"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:maxLines="7"
+            android:ellipsize="end"
+            />
+
+        <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,12 +151,15 @@
                     android:id="@+id/iv_video"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
                     />
 
                 <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_paly"
                     />
 
                 <TextView

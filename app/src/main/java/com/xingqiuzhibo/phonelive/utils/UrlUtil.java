@@ -48,4 +48,15 @@ public class UrlUtil {
     //密码找回
     public static String FIND_PWD_UPDATE = AppConfig.HOST + "/api/public/?service=Login.userFindPassword";
 
+    //获取动态列表
+    public static String GET_TIE_ZI = AppConfig.BASE_URL + "terminfo/list";
+    //可选钻石列表
+    public static String DIAMOND_LIST = AppConfig.BASE_URL + "terminfo/diamondList";
+    //获取一二级栏目
+    public static String RANGE_LIST = AppConfig.BASE_URL + "termrange/list";
+    //发布动态
+    public static String PUBLISH = AppConfig.BASE_URL + "terminfo/save";
+    //上传文件
+    public static String UPLOAD_FILE = AppConfig.BASE_URL + "base/file/upload";
+
 }

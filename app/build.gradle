@@ -132,4 +132,7 @@ dependencies {
 
     //点击查看更多的TextView
     compile 'com.ms-square:expandableTextView:0.1.4'
+
+    //gson解析
+    compile 'com.google.code.gson:gson:2.8.0'
 }
