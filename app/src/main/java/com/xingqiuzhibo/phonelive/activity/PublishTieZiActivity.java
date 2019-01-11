@@ -140,6 +140,9 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
     //上传服务器的实体类
     private TermInfoEntity entity = new TermInfoEntity();
 
+    //图文时的图片集合
+    private List<String> imgList = new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_publish_tie_zi;
@@ -467,7 +470,7 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
                     ToastUtil.show("图片不能为空");
                     return;
                 }
-                entity.setContent(etPicContent.getText().toString().trim());
+                uploadImages();
                 break;
             case 2:
 //                        setTitle("视频");
@@ -492,6 +495,58 @@ public class PublishTieZiActivity extends AbsActivity implements SelectPhotoDial
         }
         publish();
     }
+
+    private void uploadImages(){
+        //上传多张图片
+
+        listShow.remove(0);
+
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        for (int i = 0; i < listShow.size(); i++) {
+            File file = new File(listShow.get(i));
+            builder.addFormDataPart("fileList", file.getName(), RequestBody.create(null, file));
+        }
+        builder.addFormDataPart("type", "1");
+        builder.addFormDataPart("userId", AppConfig.getInstance().getUid());
+        RequestBody body = builder.build();
+        OkGo.<String>post(UrlUtil.UPLOAD_IMAGE)
+//        OkGo.<String>post("http://192.168.1.158:8585/xqpd/tdapp/base/file/uploadBatch")
+                .tag(this)
+                .upRequestBody(body)
+                .params("type", 1)
+                .params("userId", AppConfig.getInstance().getUid())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            org.json.JSONObject jsonObject = new org.json.JSONObject(response.body());
+                            if (jsonObject.getInt("code") == 0) {
+                                JSONArray jsonArray = jsonObject.optJSONArray("urlList");
+                                for (int i = 0 ; i < jsonArray.length() ; i ++ ){
+                                    imgList.add(jsonArray.get(i).toString());
+                                }
+
+                                entity.setContent(etPicContent.getText().toString().trim());
+                                entity.setImgList(imgList);
+                                publish();
+
+                            }
+                            dialog.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+    }
+
 
     //上传视频
     private void uploadFile(final int type){

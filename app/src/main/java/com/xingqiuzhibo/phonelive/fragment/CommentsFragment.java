@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.xingqiuzhibo.phonelive.R;
 import com.xingqiuzhibo.phonelive.adapter.DialogCommentsAdapter;
 import com.xingqiuzhibo.phonelive.bean.CommentBean;
+import com.xingqiuzhibo.phonelive.bean.CommunityCommentEntity;
 import com.xingqiuzhibo.phonelive.utils.ToastUtil;
 import com.xingqiuzhibo.phonelive.utils.Utils;
 
@@ -41,7 +42,7 @@ public class CommentsFragment extends BottomSheetDialogFragment {
 
     private Unbinder unbinder;
 
-    private List<CommentBean> list = new ArrayList<>();//数据源
+    private List<CommunityCommentEntity> list = new ArrayList<>();//数据源
     private DialogCommentsAdapter adapter;
 
     public CommentsFragment() {
@@ -71,7 +72,7 @@ public class CommentsFragment extends BottomSheetDialogFragment {
 
         list.clear();
         for (int i = 0 ; i < 5 ; i ++){
-            list.add(new CommentBean());
+            list.add(new CommunityCommentEntity());
         }
 
         if(list.size() >= 4){

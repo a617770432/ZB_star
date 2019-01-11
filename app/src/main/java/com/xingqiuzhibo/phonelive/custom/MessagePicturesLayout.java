@@ -154,7 +154,7 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
                 if(isFuzzy){
                     //开启模糊
                     //判断数组内图片下标模糊对应的boolean值
-                    Glide.with(getContext()).load(thumbList.get(i)).bitmapTransform(new BlurTransformation(getContext(), 30)).into(iPicture);
+                    Glide.with(getContext()).load(thumbList.get(i)).bitmapTransform(new BlurTransformation(getContext(), 60)).into(iPicture);
 //                    if(mFuzzy[i]){
 //                    }else {
 //                        Glide.with(getContext()).load(thumbList.get(i)).into(iPicture);

@@ -19,11 +19,14 @@ public class ReportAdapter extends BaseQuickAdapter<ReportBean, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, ReportBean item) {
+
+        helper.setText(R.id.tv_title , item.getName());
+
         AppCompatImageView ivCheck = helper.getView(R.id.iv_check);
         if(item.isCheck()){
             ivCheck.setImageResource(R.mipmap.icon_red_dot);
         }else {
-            ivCheck.setImageResource(R.mipmap.icon_red_dot);
+            ivCheck.setImageResource(R.mipmap.icon_not_selected);
         }
 
     }

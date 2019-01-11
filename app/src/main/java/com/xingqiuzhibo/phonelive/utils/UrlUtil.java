@@ -58,5 +58,29 @@ public class UrlUtil {
     public static String PUBLISH = AppConfig.BASE_URL + "terminfo/save";
     //上传文件
     public static String UPLOAD_FILE = AppConfig.BASE_URL + "base/file/upload";
+    //上传多图
+    public static String UPLOAD_IMAGE = AppConfig.BASE_URL + "base/file/uploadBatch";
+    //获取关注人的动态
+    public static String FOCUS_LIST = AppConfig.BASE_URL + "terminfo/getFocusTermList";
+    //动态内容点赞次数+1
+    public static String CLICK_GOOD = AppConfig.BASE_URL + "terminfo/addStarTime";
+    //取消动态点赞
+    public static String CANCEL_GOOD = AppConfig.BASE_URL + "terminfo/cancelStarTime";
+    //关注用户
+    public static String FOCUS_USER = AppConfig.BASE_URL + "terminfo/focusUser";
+    //取消关注用户
+    public static String CANCEL_FOCUS = AppConfig.BASE_URL + "terminfo/cancelFocusUser";
+    //提交举报
+    public static String REPORT_SAVE = AppConfig.BASE_URL + "report/save";
+    //获取评论列表
+    public static String COMMENT_LIST = AppConfig.BASE_URL + "terminfo/getCommentByTermId";
+    //发表评论
+    public static String ADD_COMMENT = AppConfig.BASE_URL + "terminfo/addComment";
+    //评论点赞次数+1
+    public static String COMMENT_GOOD = AppConfig.BASE_URL + "terminfo/addCommentStarTime";
+    //取消评论点赞
+    public static String CANCEL_COMMENT_GOOD = AppConfig.BASE_URL + "terminfo/cancelCommentStarTime";
+    //浏览次数+1
+    public static String ADD_BROWSE = AppConfig.BASE_URL + "terminfo/addWatchTime";
 
 }

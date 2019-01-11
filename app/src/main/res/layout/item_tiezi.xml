@@ -90,6 +90,23 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="已关注"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:background="@drawable/round_stroke_black_5"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                />
+
+            <TextView
                 android:id="@+id/tv_charge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +115,9 @@
                 android:layout_alignParentEnd="true"
                 android:text="收费：0"
                 android:textColor="#999999"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
 
@@ -187,6 +206,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"

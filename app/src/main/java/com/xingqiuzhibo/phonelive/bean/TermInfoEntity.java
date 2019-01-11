@@ -1,5 +1,8 @@
 package com.xingqiuzhibo.phonelive.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +13,7 @@ import java.util.List;
  * @email 123456@qq.com
  * @date 2019-01-04 10:43:42
  */
-public class TermInfoEntity {
+public class TermInfoEntity implements Parcelable {
 
 	//帖子Id
 	private Integer termId;
@@ -329,4 +332,85 @@ public class TermInfoEntity {
 	public void setIsfocus(Integer isfocus) {
 		this.isfocus = isfocus;
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeValue(this.termId);
+		dest.writeValue(this.uid);
+		dest.writeString(this.uname);
+		dest.writeValue(this.isFree);
+		dest.writeValue(this.amount);
+		dest.writeString(this.createTime);
+		dest.writeString(this.content);
+		dest.writeString(this.title);
+		dest.writeString(this.video);
+		dest.writeValue(this.filetype);
+		dest.writeValue(this.type);
+		dest.writeValue(this.auditStatus);
+		dest.writeValue(this.status);
+		dest.writeValue(this.oneRid);
+		dest.writeValue(this.twoRid);
+		dest.writeString(this.oneRangeName);
+		dest.writeString(this.twoRangeName);
+		dest.writeValue(this.commentCount);
+		dest.writeValue(this.hits);
+		dest.writeValue(this.assist);
+		dest.writeValue(this.istop);
+		dest.writeValue(this.recommended);
+		dest.writeValue(this.sort);
+		dest.writeString(this.auditReason);
+		dest.writeStringList(this.imgList);
+		dest.writeValue(this.isstar);
+		dest.writeValue(this.isfocus);
+	}
+
+	public TermInfoEntity() {
+	}
+
+	protected TermInfoEntity(Parcel in) {
+		this.termId = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.uid = (Long) in.readValue(Long.class.getClassLoader());
+		this.uname = in.readString();
+		this.isFree = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.amount = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.createTime = in.readString();
+		this.content = in.readString();
+		this.title = in.readString();
+		this.video = in.readString();
+		this.filetype = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.type = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.auditStatus = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.status = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.oneRid = (Long) in.readValue(Long.class.getClassLoader());
+		this.twoRid = (Long) in.readValue(Long.class.getClassLoader());
+		this.oneRangeName = in.readString();
+		this.twoRangeName = in.readString();
+		this.commentCount = (Long) in.readValue(Long.class.getClassLoader());
+		this.hits = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.assist = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.istop = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.recommended = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.sort = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.auditReason = in.readString();
+		this.imgList = in.createStringArrayList();
+		this.isstar = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.isfocus = (Integer) in.readValue(Integer.class.getClassLoader());
+	}
+
+	public static final Parcelable.Creator<TermInfoEntity> CREATOR = new Parcelable.Creator<TermInfoEntity>() {
+		@Override
+		public TermInfoEntity createFromParcel(Parcel source) {
+			return new TermInfoEntity(source);
+		}
+
+		@Override
+		public TermInfoEntity[] newArray(int size) {
+			return new TermInfoEntity[size];
+		}
+	};
 }
