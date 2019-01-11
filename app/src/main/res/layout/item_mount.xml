@@ -1,62 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        app:cardElevation="10dp"
-        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp"
-            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_white_conner_5"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="90dp" />
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_car"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="花费钻石"
-                android:textSize="12sp"
-                android:textColor="#666666"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="花费钻石"
+            android:textColor="#666666"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tv_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="300,000"
-                android:textSize="18sp"
-                android:textColor="#DD9F28"
-                />
+        <TextView
+            android:id="@+id/tv_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="300,000"
+            android:textColor="#DD9F28"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_buy"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
-                android:background="@drawable/round_yellow_20"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="38dp"
-                android:layout_marginBottom="17dp"
-                android:text="购买"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                />
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_yellow_20"
+            android:gravity="center"
+            android:text="购买"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </android.support.v7.widget.CardView>
 
 </LinearLayout>

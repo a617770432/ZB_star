@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.xingqiuzhibo.phonelive.AppConfig;
 import com.xingqiuzhibo.phonelive.Constants;
 import com.xingqiuzhibo.phonelive.R;
@@ -26,6 +27,7 @@ import com.xingqiuzhibo.phonelive.activity.MyCoinActivity;
 import com.xingqiuzhibo.phonelive.activity.MyDetailAllActivity;
 import com.xingqiuzhibo.phonelive.activity.MyProfitActivity;
 import com.xingqiuzhibo.phonelive.activity.MyShareActivity;
+import com.xingqiuzhibo.phonelive.activity.OnlineMallActivity;
 import com.xingqiuzhibo.phonelive.activity.SettingActivity;
 import com.xingqiuzhibo.phonelive.activity.WebViewActivity;
 import com.xingqiuzhibo.phonelive.adapter.MainMeAdapter;
@@ -241,6 +243,8 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
                 //我的明细
                 Intent intent = new Intent(mContext, MyDetailAllActivity.class);
                 mContext.startActivity(intent);
+            } else if (bean.getId() == 4) {
+                mContext.startActivity(new Intent(mContext, OnlineMallActivity.class));
             } else {
                 WebViewActivity.forward(mContext, url);
             }

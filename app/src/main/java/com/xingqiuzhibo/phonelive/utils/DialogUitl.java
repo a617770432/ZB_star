@@ -1,5 +1,6 @@
 package com.xingqiuzhibo.phonelive.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.InputType;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xingqiuzhibo.phonelive.R;
+import com.xingqiuzhibo.phonelive.activity.AbsActivity;
+import com.xingqiuzhibo.phonelive.views.DangerousOperationDialog;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -352,6 +355,31 @@ public class DialogUitl {
 
     public interface SimpleCallback2 extends SimpleCallback {
         void onCancelClick();
+    }
+
+    /**
+     * 危险操作提示框
+     *
+     * @param context
+     * @param msg
+     * @param positiveTv
+     * @param positiveListener
+     * @return
+     */
+    public static DangerousOperationDialog dangerousOperationDialog(Activity context, String msg, String positiveTv, View.OnClickListener positiveListener) {
+        final DangerousOperationDialog myDialog = new DangerousOperationDialog(context);
+        myDialog.getWindow().setLayout((int) (AbsActivity.SCREEN_WIDTH * 0.7), (int) (AbsActivity.SCREEN_HEIGHT * 0.2)); //对话框大小应根据屏幕大小调整
+        myDialog.setContent(msg);
+        myDialog.setPositiveText(positiveTv);
+        myDialog.setOnPositiveListener(positiveListener);
+        myDialog.setOnNegativeListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
+        return myDialog;
     }
 
 }

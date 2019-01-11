@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 
-public class MainActivity extends AbsActivity implements MessagePicturesLayout.Callback{
+public class MainActivity extends AbsActivity implements MessagePicturesLayout.Callback {
 
     private ViewGroup mRootView;
     private TabButtonGroup mTabButtonGroup;
@@ -94,6 +94,7 @@ public class MainActivity extends AbsActivity implements MessagePicturesLayout.C
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
 
         AbsActivity.SCREEN_WIDTH = outMetrics.widthPixels;
+        AbsActivity.SCREEN_HEIGHT = outMetrics.heightPixels;
 
         mFirstLogin = getIntent().getBooleanExtra(Constants.FIRST_LOGIN, false);
         mRootView = (ViewGroup) findViewById(R.id.rootView);
@@ -102,7 +103,7 @@ public class MainActivity extends AbsActivity implements MessagePicturesLayout.C
         mViewPager.setOffscreenPageLimit(4);
         mViewHolders = new AbsMainViewHolder[4];
         mViewHolders[0] = new MainHomeViewHolder(mContext, mViewPager);
-        mViewHolders[1] = new MainNearViewHolder(mContext, mViewPager , getSupportFragmentManager());
+        mViewHolders[1] = new MainNearViewHolder(mContext, mViewPager, getSupportFragmentManager());
         mViewHolders[2] = new MainListViewHolder(mContext, mViewPager);
         mViewHolders[3] = new MainMeViewHolder(mContext, mViewPager);
         List<View> list = new ArrayList<>();
@@ -421,7 +422,7 @@ public class MainActivity extends AbsActivity implements MessagePicturesLayout.C
     private ImageWatcherHelper iwHelper;
 
     @Override
-    public void onThumbPictureClick(ImageView i, SparseArray<ImageView> imageGroupList, List<Uri> urlList , int layoutPosition) {
+    public void onThumbPictureClick(ImageView i, SparseArray<ImageView> imageGroupList, List<Uri> urlList, int layoutPosition) {
         //图片点击放大点击事件
         iwHelper.show(i, imageGroupList, urlList);
         EventBus.getDefault().post(layoutPosition);

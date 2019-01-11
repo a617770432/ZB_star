@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.xingqiuzhibo.phonelive.fragment.BeautifulIdFragment;
@@ -19,7 +20,7 @@ public class OnlineMallAdapter extends FragmentPagerAdapter {
     private List<String> list;
     private List<Fragment> fragments = new ArrayList<>();
 
-    public OnlineMallAdapter(FragmentManager fm, List<String> list , int openType) {
+    public OnlineMallAdapter(FragmentManager fm, List<String> list, int openType) {
         super(fm);
         this.list = list;
         fragments.clear();
@@ -36,7 +37,7 @@ public class OnlineMallAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        return (Fragment)super.instantiateItem(container, position);
+        return (Fragment) super.instantiateItem(container, position);
     }
 
     @Override

@@ -334,7 +334,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.CircleDetailActivity" />
         <activity android:name=".activity.SearchTieZiActivity" />
-        <activity android:name=".activity.OnlineMallActivity" />
+        <activity
+            android:name=".activity.OnlineMallActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.EquipActivity"></activity>
     </application>
 

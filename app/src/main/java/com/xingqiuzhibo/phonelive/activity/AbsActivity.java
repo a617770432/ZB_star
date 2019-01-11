@@ -29,6 +29,7 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected Context mContext;
     protected List<LifeCycleListener> mLifeCycleListeners;
     public static int SCREEN_WIDTH;
+    public static int SCREEN_HEIGHT;
     public static List<Activity> acts = new ArrayList<>();
 
 

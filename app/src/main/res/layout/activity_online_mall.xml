@@ -4,11 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.OnlineMallActivity"
     android:orientation="vertical"
-    >
+    tools:context=".activity.OnlineMallActivity">
 
-    <include layout="@layout/view_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        android:paddingTop="19dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp">
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="在线商城"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:padding="9dp"
+                android:src="@mipmap/icon_back"
+                android:tint="@color/textColor" />
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:paddingRight="15dp"
+                android:text="装备中心"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/sliding_tab"
@@ -22,7 +63,7 @@
         app:tl_indicator_gravity="BOTTOM"
         app:tl_indicator_height="3dp"
         app:tl_indicator_style="NORMAL"
-        app:tl_indicator_width="12dp"
+        app:tl_indicator_width="24dp"
         app:tl_tab_space_equal="true"
         app:tl_textSelectColor="@color/black"
         app:tl_textUnselectColor="#999999"
@@ -32,7 +73,6 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

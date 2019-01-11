@@ -41,6 +41,9 @@ public class UrlUtil {
     //分销任务明细
     public static String SHARE_TASK_MSG = AppConfig.HOST + "/index.php";
 
+    //php接口标头
+    public static String BASE_PHP_URL = AppConfig.HOST + "/index.php";
+
     //注册密保问题
     public static String REGISTER_PROTECT_QUESTION = AppConfig.HOST + "/api/public/?service=Login.secretQuestion";
     //账号注册

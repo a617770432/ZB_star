@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
+    protected View mRootView;
     //Fragment的View加载完毕的标记
     private boolean isViewCreated;
 
@@ -40,10 +41,10 @@ public abstract class BaseFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        unbind = ButterKnife.bind(this, view);
+        mRootView = inflater.inflate(getLayoutId(), container, false);
+        unbind = ButterKnife.bind(this, mRootView);
         initView();
-        return view;
+        return mRootView;
     }
 
     protected abstract void initView();

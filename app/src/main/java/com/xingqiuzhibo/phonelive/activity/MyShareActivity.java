@@ -182,7 +182,8 @@ public class MyShareActivity extends AbsActivity implements View.OnClickListener
         //计算视图大小
         DisplayMetrics displayMetrics = SystemUtils.getWindowDisplayMetrics(mContext);
         final int width = displayMetrics.widthPixels;
-        final int height = displayMetrics.heightPixels - SystemUtils.getStatusBarHeight(mContext) - SystemUtils.getActionBarHeight(mContext) - getResources().getDimensionPixelSize(R.dimen.default_bottom_bar_height);
+//        final int height = displayMetrics.heightPixels - SystemUtils.getStatusBarHeight(mContext) - SystemUtils.getActionBarHeight(mContext) - getResources().getDimensionPixelSize(R.dimen.default_bottom_bar_height);
+        final int height = displayMetrics.heightPixels - SystemUtils.getStatusBarHeight(mContext) - SystemUtils.getActionBarHeight(mContext);
         //将视图生成图片
         Bitmap image = SystemUtils.generateImageFromView(qrcodeView, width, height);
         //将图片保存到系统相册
